@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Dein Name</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f7f4ef;
+      --ink:   #1a1a18;
+      --mid:   #8a8880;
+      --accent:#c8b99a;
+      --gap:   clamp(2rem, 5vw, 5rem);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      letter-spacing: 0.03em;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem var(--gap);
+      background: var(--cream);
+      border-bottom: 1px solid rgba(26,26,24,0.1);
+    }
+
+    .nav-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 var(--gap) clamp(3rem, 6vw, 6rem);
+      padding-top: 80px;
+    }
+
+    .hero-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--mid);
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      max-width: 380px;
+      color: var(--mid);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    /* Platzhalter für Hauptbild */
+    .hero-img {
+      position: absolute;
+      top: 80px;
+      right: var(--gap);
+      bottom: 0;
+      width: clamp(280px, 45vw, 620px);
+      background: #e8e2d9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: var(--mid);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .hero-img .icon { font-size: 2rem; opacity: 0.4; }
+
+    .hero { position: relative; }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: clamp(2rem, 4vw, 4rem);
+    }
+
+    .section-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 300;
+    }
+
+    .section-header span {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* ── WORK GRID ── */
+    #work {
+      padding: var(--gap);
+      padding-top: calc(var(--gap) + 2rem);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.2rem;
+    }
+
+    .grid-item {
+      position: relative;
+      overflow: hidden;
+      background: #e0dbd2;
+      cursor: pointer;
+    }
+
+    /* Verschiedene Größen für visuelles Gewicht */
+    .grid-item:nth-child(1) { grid-column: span 7; aspect-ratio: 4/3; }
+    .grid-item:nth-child(2) { grid-column: span 5; aspect-ratio: 3/4; }
+    .grid-item:nth-child(3) { grid-column: span 4; aspect-ratio: 3/4; }
+    .grid-item:nth-child(4) { grid-column: span 8; aspect-ratio: 16/9; }
+    .grid-item:nth-child(5) { grid-column: span 6; aspect-ratio: 1/1; }
+    .grid-item:nth-child(6) { grid-column: span 6; aspect-ratio: 1/1; }
+
+    .grid-item img,
+    .grid-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .grid-item:hover img,
+    .grid-item:hover video { transform: scale(1.03); }
+
+    /* Platzhalter-Stil wenn noch kein Bild */
+    .placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: var(--mid);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: #e0dbd2;
+    }
+
+    .placeholder .icon { font-size: 1.8rem; opacity: 0.35; }
+
+    /* Hover-Overlay */
+    .grid-caption {
+      position: absolute;
+      inset: 0;
+      background: rgba(26,26,24,0.55);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .grid-item:hover .grid-caption { opacity: 1; }
+
+    .grid-caption h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--cream);
+    }
+
+    .grid-caption p {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(247,244,239,0.6);
+      margin-top: 0.25rem;
+    }
+
+    /* ── VIDEO SECTION ── */
+    #video {
+      padding: var(--gap);
+      padding-top: calc(var(--gap) * 1.5);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .video-item {
+      background: #e0dbd2;
+      position: relative;
+    }
+
+    .video-item video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+    }
+
+    .video-item.wide {
+      grid-column: span 2;
+    }
+
+    .video-item.wide video {
+      aspect-ratio: 16/9;
+    }
+
+    .video-placeholder {
+      aspect-ratio: 9/16;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: var(--mid);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .video-placeholder.wide-ph { aspect-ratio: 16/9; }
+    .video-placeholder .icon { font-size: 2.2rem; opacity: 0.35; }
+
+    /* ── ABOUT ── */
+    #about {
+      padding: var(--gap);
+      padding-top: calc(var(--gap) * 1.5);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 8rem);
+      align-items: start;
+    }
+
+    .about-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+    }
+
+    .about-text h2 em {
+      font-style: italic;
+      color: var(--mid);
+    }
+
+    .about-text p {
+      color: var(--mid);
+      margin-bottom: 1rem;
+    }
+
+    .about-img {
+      background: #e0dbd2;
+      aspect-ratio: 3/4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      color: var(--mid);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .about-img .icon { font-size: 2rem; opacity: 0.35; }
+
+    /* ── CONTACT ── */
+    #contact {
+      padding: var(--gap);
+      padding-top: calc(var(--gap) * 1.5);
+      padding-bottom: calc(var(--gap) * 2);
+      text-align: center;
+      border-top: 1px solid rgba(26,26,24,0.1);
+    }
+
+    #contact h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    #contact p {
+      color: var(--mid);
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-link {
+      display: inline-block;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .contact-link:hover {
+      color: var(--mid);
+      border-color: var(--mid);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 1.5rem var(--gap);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+      border-top: 1px solid rgba(26,26,24,0.08);
+    }
+
+    footer a {
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--ink); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-img { display: none; }
+      .hero-title { font-size: clamp(3rem, 12vw, 5rem); }
+
+      .grid-item:nth-child(1),
+      .grid-item:nth-child(2),
+      .grid-item:nth-child(3),
+      .grid-item:nth-child(4),
+      .grid-item:nth-child(5),
+      .grid-item:nth-child(6) {
+        grid-column: span 12;
+      }
+
+      .video-grid { grid-template-columns: 1fr; }
+      .video-item.wide { grid-column: span 1; }
+
+      #about { grid-template-columns: 1fr; }
+      .about-img { order: -1; aspect-ratio: 4/3; }
+
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-name">Dein Name</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#video">Film</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-label">Fashion Design Portfolio</p>
+    <h1 class="hero-title">
+      Form &amp;<br>
+      <em>Silence</em>
+    </h1>
+    <p class="hero-sub">
+      Deine kurze Beschreibung — Stil, Ansatz, was dich als Designer:in ausmacht.
+      2–3 Sätze reichen hier vollkommen.
+    </p>
+
+    <!-- HAUPTBILD hier einsetzen: src="img/hero.jpg" -->
+    <div class="hero-img">
+      <span class="icon">🖼</span>
+      <span>Hauptbild hier</span>
+      <span style="font-size:0.65rem; opacity:0.6;">img/hero.jpg</span>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="section-header">
+      <h2>Selected Work</h2>
+      <span>2022 – 2025</span>
+    </div>
+
+    <div class="grid">
+
+      <!-- Item 1: Großes Bild links -->
+      <div class="grid-item">
+        <!-- <img src="img/work1.jpg" alt="Kollektion Name"> -->
+        <div class="placeholder">
+          <span class="icon">🖼</span>
+          <span>Bild 1 — img/work1.jpg</span>
+        </div>
+        <div class="grid-caption">
+          <h3>Kollektion Name</h3>
+          <p>Jahr · Kategorie</p>
+        </div>
+      </div>
+
+      <!-- Item 2: Hochformat rechts -->
+      <div class="grid-item">
+        <!-- <img src="img/work2.jpg" alt="Kollektion Name"> -->
+        <div class="placeholder">
+          <span class="icon">🖼</span>
+          <span>Bild 2 — img/work2.jpg</span>
+        </div>
+        <div class="grid-caption">
+          <h3>Kollektion Name</h3>
+          <p>Jahr · Kategorie</p>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="grid-item">
+        <!-- <img src="img/work3.jpg" alt="Kollektion Name"> -->
+        <div class="placeholder">
+          <span class="icon">🖼</span>
+          <span>Bild 3 — img/work3.jpg</span>
+        </div>
+        <div class="grid-caption">
+          <h3>Kollektion Name</h3>
+          <p>Jahr · Kategorie</p>
+        </div>
+      </div>
+
+      <!-- Item 4: Breites Bild -->
+      <div class="grid-item">
+        <!-- <img src="img/work4.jpg" alt="Kollektion Name"> -->
+        <div class="placeholder">
+          <span class="icon">🖼</span>
+          <span>Bild 4 — img/work4.jpg</span>
+        </div>
+        <div class="grid-caption">
+          <h3>Kollektion Name</h3>
+          <p>Jahr · Kategorie</p>
+        </div>
+      </div>
+
+      <!-- Items 5 & 6 -->
+      <div class="grid-item">
+        <!-- <img src="img/work5.jpg" alt="Kollektion Name"> -->
+        <div class="placeholder">
+          <span class="icon">🖼</span>
+          <span>Bild 5 — img/work5.jpg</span>
+        </div>
+        <div class="grid-caption">
+          <h3>Kollektion Name</h3>
+          <p>Jahr · Kategorie</p>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <!-- <img src="img/work6.jpg" alt="Kollektion Name"> -->
+        <div class="placeholder">
+          <span class="icon">🖼</span>
+          <span>Bild 6 — img/work6.jpg</span>
+        </div>
+        <div class="grid-caption">
+          <h3>Kollektion Name</h3>
+          <p>Jahr · Kategorie</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section id="video">
+    <div class="section-header">
+      <h2>Film</h2>
+      <span>Lookbooks &amp; Showreels</span>
+    </div>
+
+    <div class="video-grid">
+
+      <!-- Breites Video oben -->
+      <div class="video-item wide">
+        <!--
+          Video einbinden:
+          <video src="video/showreel.mp4" poster="img/poster1.jpg"
+                 controls muted playsinline></video>
+        -->
+        <div class="video-placeholder wide-ph">
+          <span class="icon">▶</span>
+          <span>Showreel — video/showreel.mp4</span>
+        </div>
+      </div>
+
+      <!-- Zwei Hochformat-Videos -->
+      <div class="video-item">
+        <!--
+          <video src="video/lookbook1.mp4" poster="img/poster2.jpg"
+                 controls muted playsinline></video>
+        -->
+        <div class="video-placeholder">
+          <span class="icon">▶</span>
+          <span>Lookbook 1</span>
+          <span style="font-size:0.65rem; opacity:0.6;">video/lookbook1.mp4</span>
+        </div>
+      </div>
+
+      <div class="video-item">
+        <!--
+          <video src="video/lookbook2.mp4" poster="img/poster3.jpg"
+                 controls muted playsinline></video>
+        -->
+        <div class="video-placeholder">
+          <span class="icon">▶</span>
+          <span>Lookbook 2</span>
+          <span style="font-size:0.65rem; opacity:0.6;">video/lookbook2.mp4</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-text">
+      <h2>
+        Design als<br>
+        <em>Haltung.</em>
+      </h2>
+      <p>
+        Hier erzählst du deine Geschichte. Wo du herkommst, was dich antreibt,
+        welchen Ansatz du in deiner Arbeit verfolgst. Echt und persönlich —
+        nicht wie ein Lebenslauf.
+      </p>
+      <p>
+        Ausbildung, Kollaborationen, Ausstellungen oder Preise können hier kurz
+        erwähnt werden, ohne dass es trocken wirkt.
+      </p>
+      <p>
+        Werkzeuge, Materialien, Einflüsse — wenn es deine Arbeit erklärt, rein damit.
+      </p>
+    </div>
+
+    <!-- Portrait oder Atelier-Foto -->
+    <div class="about-img">
+      <!-- <img src="img/portrait.jpg" alt="Portrait" style="width:100%;height:100%;object-fit:cover;display:block;"> -->
+      <span class="icon">🖼</span>
+      <span>Portrait oder Atelier</span>
+      <span style="font-size:0.65rem; opacity:0.6;">img/portrait.jpg</span>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2>Lass uns reden.</h2>
+    <p>Anfragen, Kollaborationen, Showroom-Besuche</p>
+    <a href="mailto:deine@email.com" class="contact-link">deine@email.com</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 Dein Name</span>
+    <div style="display:flex; gap:2rem;">
+      <a href="https://instagram.com/deinhandle" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://linkedin.com/in/deinprofil" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+
+</body>
+</html>
