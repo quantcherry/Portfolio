@@ -513,7 +513,7 @@
       </a>
 
       <a href="projekte/red-leather-two-piece.html" class="grid-item">
-        <img src="img/red-leather-two-piece-00066.jpeg" alt="Leather Two Piece">
+        <img src="img/red-leather-two-piece-00066.jpeg" alt="Leather Two Piece" style="object-position: center top;">
         <div class="grid-caption"><h3>Leather Two Piece</h3></div>
       </a>
 
@@ -626,6 +626,20 @@
   <footer>
     <span>© 2026 Paula Werquet</span>
   </footer>
+
+  <script>
+    const videos = document.querySelectorAll('video');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.play();
+        } else {
+          entry.target.pause();
+        }
+      });
+    }, { threshold: 0.3 });
+    videos.forEach(v => observer.observe(v));
+  </script>
 
 </body>
 </html>
