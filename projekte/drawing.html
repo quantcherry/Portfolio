@@ -9,40 +9,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --cream: #f7f4ef; --ink: #1a1a18; --mid: #8a8880; --gap: clamp(2rem, 5vw, 5rem); }
+    :root { --cream: #ffffff; --ink: #1a1a18; --mid: #8a8880; --gap: clamp(2rem, 5vw, 5rem); }
     html { scroll-behavior: smooth; }
     body { background: var(--cream); color: var(--ink); font-family: 'Jost', sans-serif; font-weight: 300; font-size: 15px; letter-spacing: 0.03em; line-height: 1.7; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem var(--gap); background: var(--cream); border-bottom: 1px solid rgba(26,26,24,0.1); }
-    .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 0 1rem 1.5rem; background: var(--cream); border-bottom: 1px solid rgba(26,26,24,0.1); }
+    .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; padding-right: 1.5rem; }
     .nav-links a { text-decoration: none; color: var(--mid); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
     .nav-links a:hover { color: var(--ink); }
-    .project-header { padding: calc(80px + var(--gap)) var(--gap) var(--gap); }
+    .project-header { padding: calc(6rem + 1.5rem) 0 1.5rem 1.5rem; }
     .project-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 300; line-height: 1; }
-    .project-desc { padding: 0 var(--gap) var(--gap); max-width: 600px; color: var(--mid); font-size: 0.9rem; line-height: 1.8; }
-    .project-grid { padding: 0 var(--gap) calc(var(--gap) * 2); display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .project-desc { padding: 0 0 1.5rem 1.5rem; max-width: 600px; color: var(--mid); font-size: 0.9rem; line-height: 1.8; }
+    .project-grid { padding: 0 0 3rem 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
     .project-grid-item { overflow: hidden; background: #e0dbd2; aspect-ratio: 3/4; }
     .project-grid-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
     .project-grid-item:hover img { transform: scale(1.03); }
     .placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--mid); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; }
-    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--mid); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; padding: var(--gap); padding-top: 0; transition: color 0.2s; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--mid); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 0 1.5rem 1.5rem; transition: color 0.2s; }
     .back-link:hover { color: var(--ink); }
-    footer { padding: 1.5rem var(--gap); font-size: 0.72rem; letter-spacing: 0.08em; color: var(--mid); border-top: 1px solid rgba(26,26,24,0.08); }
-    @media (max-width: 768px) { .project-grid { grid-template-columns: 1fr; } }
+    footer { padding: 1.5rem; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--mid); border-top: 1px solid rgba(26,26,24,0.08); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 0 1rem 1.5rem; height: 6rem; background: var(--cream); border-bottom: 1px solid rgba(26,26,24,0.1); }
+    .hamburger { display: none; }
+    @media (max-width: 960px) {
+      .project-grid { grid-template-columns: 1fr; }
+      nav { height: 6.5rem; padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; flex-direction: column; position: fixed; top: 6.5rem; right: 1.5rem; left: auto; width: fit-content; background: var(--cream); padding: 1.2rem 1.8rem; gap: 1.2rem; border: 1px solid rgba(26,26,24,0.1); z-index: 99; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 0; }
+      .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); }
+    }
   </style>
 </head>
 <body>
   <nav>
     <a href="../index.html" class="nav-name">WERQUET</a>
-    <ul class="nav-links">
+    <a href="../index.html" style="position:absolute; left:50%; transform:translateX(-50%);"><img src="../img/IMG_2625.JPG" alt="Logo" style="height:6rem; width:auto; display:block;"></a>
+    <ul class="nav-links" id="nav-links">
       <li><a href="../index.html#work">Work</a></li>
-      <li><a href="videos.html">Film</a></li>
+      <li><a href="videos.html">Visuals</a></li>
       <li><a href="../index.html#about">About</a></li>
       <li><a href="../index.html#contact">Contact</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menue" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
   <div class="project-header"><h1>Drawings</h1></div>
-  <p class="project-desc">Beschreibungstext hier — oder diesen Block einfach löschen.</p>
+  <p class="project-desc">Digital Drawings on ProCreate.</p>
   <div class="project-grid">
     <div class="project-grid-item"><img src="../img/drawing-00089.jpeg" alt="Drawing"></div>
     <div class="project-grid-item"><img src="../img/drawing-00090.jpeg" alt="Drawing"></div>
@@ -55,8 +70,16 @@
     <div class="project-grid-item"><img src="../img/drawing-00085.jpeg" alt="Drawing"></div>
     <div class="project-grid-item"><img src="../img/drawing-00086.jpeg" alt="Drawing"></div>
     <div class="project-grid-item"><img src="../img/drawing-00088.jpeg" alt="Drawing"></div>
+    <div class="project-grid-item"><img src="../img/IMG_2505.JPG" alt="Drawing"></div>
   </div>
   <a href="../index.html" class="back-link">← Zurück zur Übersicht</a>
-  <footer><span>© 2025 Paula Werquet-Britzen</span></footer>
+  <footer><span>© 2026 Paula Werquet</span></footer>
+  <script>
+    document.querySelectorAll('#nav-links a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        document.getElementById('nav-links').classList.remove('open');
+      });
+    });
+  </script>
 </body>
 </html>

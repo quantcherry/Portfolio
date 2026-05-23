@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio — Paula Werquet-Britzen</title>
+  <title>Portfolio — Paula Werquet</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream: #f7f4ef;
+      --cream: #ffffff;
       --ink:   #1a1a18;
       --mid:   #8a8880;
       --accent:#c8b99a;
@@ -38,15 +38,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem var(--gap);
-      height: 6.5rem;
+      padding: 1rem 0 1rem 1.5rem;
+      height: 6rem;
       background: var(--cream);
       border-bottom: 1px solid rgba(26,26,24,0.1);
     }
 
     .nav-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
+      font-size: 1.4rem;
       font-weight: 300;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -58,6 +58,7 @@
       display: flex;
       gap: 2.5rem;
       list-style: none;
+      padding-right: 1.5rem;
     }
 
     .nav-links a {
@@ -71,16 +72,15 @@
 
     .nav-links a:hover { color: var(--ink); }
 
+    .hamburger { display: none; }
+
     /* ── HERO ── */
     .hero {
       min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      text-align: left;
-      padding: 0 var(--gap) clamp(3rem, 6vw, 6rem);
-      padding-top: 9rem;
+      display: grid;
+      grid-template-columns: 1fr 45vw;
+      grid-template-rows: 1fr;
+      padding-top: 6rem;
     }
 
     .hero-label {
@@ -107,34 +107,25 @@
 
     .hero-sub {
       margin-top: 2rem;
-      max-width: 380px;
       color: var(--mid);
       font-size: 0.9rem;
       line-height: 1.8;
     }
 
-    /* Platzhalter für Hauptbild */
-    .hero-img {
-      position: absolute;
-      top: 80px;
-      right: var(--gap);
-      bottom: 0;
-      width: clamp(280px, 45vw, 620px);
-      background: #e8e2d9;
+    .hero-text {
       display: flex;
-      align-items: center;
-      justify-content: center;
       flex-direction: column;
-      gap: 0.5rem;
-      color: var(--mid);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      justify-content: center;
+      padding: 3rem 2rem 3rem 1.5rem;
+    }
+
+    .hero-img {
+      position: relative;
+      background: #e8e2d9;
+      overflow: hidden;
     }
 
     .hero-img .icon { font-size: 2rem; opacity: 0.4; }
-
-    .hero { position: relative; }
 
     /* ── SECTION HEADER ── */
     .section-header {
@@ -159,13 +150,12 @@
 
     /* ── WORK GRID ── */
     #work {
-      padding: var(--gap);
-      padding-top: calc(var(--gap) + 2rem);
+      padding: calc(var(--gap) + 2rem) 0 var(--gap) 1.5rem;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 1.2rem;
     }
 
@@ -180,15 +170,8 @@
     }
 
     /* Verschiedene Größen für visuelles Gewicht */
-    .grid-item:nth-child(1) { grid-column: span 7; aspect-ratio: 4/3; }
-    .grid-item:nth-child(2) { grid-column: span 5; aspect-ratio: 3/4; margin-top: 6rem; }
-    .grid-item:nth-child(3) { grid-column: span 6; aspect-ratio: 2/3; margin-top: -11rem; }
-    .grid-item:nth-child(4) { grid-column: span 6; aspect-ratio: 2/3; margin-top: 4rem; }
-    .grid-item:nth-child(5) { grid-column: span 6; aspect-ratio: 2/3; margin-top: -8rem; }
-    .grid-item:nth-child(6) { grid-column: span 6; aspect-ratio: 3/4; margin-top: 3rem; }
-    .grid-item:nth-child(7) { grid-column: span 5; aspect-ratio: 1/2; margin-top: 2rem; }
-    .grid-item:nth-child(8) { grid-column: span 7; aspect-ratio: 4/3; margin-top: 8rem; }
-    .grid-item:nth-child(9) { grid-column: span 12; aspect-ratio: 21/9; }
+    .grid-item { aspect-ratio: 3/4; }
+    .grid-item--wide { grid-column: span 2; }
 
     .grid-item img,
     .grid-item video {
@@ -252,8 +235,7 @@
 
     /* ── VIDEO SECTION ── */
     #video {
-      padding: var(--gap);
-      padding-top: calc(var(--gap) * 1.5);
+      padding: calc(var(--gap) * 1.5) 0 var(--gap) 1.5rem;
     }
 
     .video-grid {
@@ -300,8 +282,7 @@
 
     /* ── ABOUT ── */
     #about {
-      padding: var(--gap);
-      padding-top: calc(var(--gap) * 1.5);
+      padding: calc(var(--gap) * 1.5) 0 var(--gap) 1.5rem;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: clamp(3rem, 6vw, 8rem);
@@ -342,11 +323,14 @@
 
     .about-img .icon { font-size: 2rem; opacity: 0.35; }
 
+    .about-rule { border: none; border-top: 1px solid rgba(26,26,24,0.1); margin: 1.5rem 0; }
+    .about-section { font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.6rem; }
+    .about-list { list-style: none; color: var(--mid); font-size: 0.9rem; line-height: 1.8; }
+    .about-list li::before { content: "•"; font-size: 1.1em; font-weight: 700; margin-right: 0.4rem; }
+
     /* ── CONTACT ── */
     #contact {
-      padding: var(--gap);
-      padding-top: calc(var(--gap) * 1.5);
-      padding-bottom: calc(var(--gap) * 2);
+      padding: calc(var(--gap) * 1.5) 0 calc(var(--gap) * 2) 1.5rem;
       text-align: center;
       border-top: 1px solid rgba(26,26,24,0.1);
     }
@@ -382,7 +366,7 @@
 
     /* ── FOOTER ── */
     footer {
-      padding: 1.5rem var(--gap);
+      padding: 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -401,30 +385,53 @@
     footer a:hover { color: var(--ink); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
       .hero-img { display: none; }
       .hero-title { font-size: clamp(3rem, 12vw, 5rem); }
 
-      .grid-item:nth-child(1),
-      .grid-item:nth-child(2),
-      .grid-item:nth-child(3),
-      .grid-item:nth-child(4),
-      .grid-item:nth-child(5),
-      .grid-item:nth-child(6),
-      .grid-item:nth-child(7),
-      .grid-item:nth-child(8),
-      .grid-item:nth-child(9) {
-        grid-column: span 12;
-      }
-
+      .grid { grid-template-columns: 1fr; }
+      .grid-item--wide { grid-column: span 1; }
       .video-grid { grid-template-columns: 1fr; }
       .video-item.wide { grid-column: span 1; }
 
       #about { grid-template-columns: 1fr; }
       .about-img { order: -1; aspect-ratio: 4/3; }
 
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { gap: 1.5rem; }
+      nav { padding: 1.2rem 1.5rem; height: 6.5rem; }
+      .nav-links { top: 6.5rem; }
+      .grid-caption { opacity: 1; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 6.5rem;
+        right: 1.5rem;
+        left: auto;
+        width: fit-content;
+        background: var(--cream);
+        padding: 1.2rem 1.8rem;
+        gap: 1.2rem;
+        border: 1px solid rgba(26,26,24,0.1);
+        z-index: 99;
+      }
+      .nav-links.open { display: flex; }
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 1.5px;
+        background: var(--ink);
+        transition: all 0.3s ease;
+      }
     }
   </style>
 </head>
@@ -434,22 +441,36 @@
   <nav>
     <a href="#" class="nav-name">WERQUET</a>
     <a href="#" style="position:absolute; left:50%; transform:translateX(-50%);"><img src="img/IMG_2625.JPG" alt="Logo" style="height:6rem; width:auto; display:block;"></a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="#work">Work</a></li>
       <li><a href="#video">Visuals</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menü" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </nav>
+
+  <script>
+    document.querySelectorAll('#nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('nav-links').classList.remove('open');
+      });
+    });
+  </script>
 
   <!-- HERO -->
   <section class="hero">
-    <h1 class="hero-title">
-      Fashion Design<br>
-      <em>Portfolio</em>
-    </h1>
-    <p class="hero-sub">by Paula Werquet-Britzen</p>
-
+    <div class="hero-text">
+      <h1 class="hero-title">
+        Fashion Design<br>
+        <em>Portfolio</em>
+      </h1>
+      <p class="hero-sub">by Paula Werquet</p>
+    </div>
     <div class="hero-img">
       <img src="img/denim-00005.jpeg" alt="Hero" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;">
     </div>
@@ -485,8 +506,8 @@
       </a>
 
       <a href="projekte/red-leather-two-piece.html" class="grid-item">
-        <img src="img/red-leather-two-piece-00066.jpeg" alt="Red Leather Two Piece">
-        <div class="grid-caption"><h3>Red Leather Two Piece</h3></div>
+        <img src="img/red-leather-two-piece-00066.jpeg" alt="Leather Two Piece">
+        <div class="grid-caption"><h3>Leather Two Piece</h3></div>
       </a>
 
       <a href="projekte/drawing.html" class="grid-item">
@@ -494,14 +515,19 @@
         <div class="grid-caption"><h3>Drawings</h3></div>
       </a>
 
+      <a href="projekte/denim-dress.html" class="grid-item grid-item--wide" style="aspect-ratio: 4/3;">
+        <img src="img/denim-dress-00020.jpeg" alt="Denim Dress">
+        <div class="grid-caption"><h3>Denim Dress</h3></div>
+      </a>
+
       <a href="projekte/alchimia-jacket.html" class="grid-item">
-        <img src="img/image2.jpeg" alt="Alchimia Jacket" style="object-position: center 60%;">
+        <img src="img/IMG_2896.JPG" alt="Alchimia Jacket" style="object-position: center 60%;">
         <div class="grid-caption"><h3>Alchimia Jacket</h3></div>
       </a>
 
-      <a href="projekte/denim-dress.html" class="grid-item">
-        <img src="img/denim-dress-00020.jpeg" alt="Denim Dress">
-        <div class="grid-caption"><h3>Denim Dress</h3></div>
+      <a href="projekte/upcycling.html" class="grid-item">
+        <img src="img/IMG_2910.JPG" alt="Upcycling">
+        <div class="grid-caption"><h3>Upcycling</h3></div>
       </a>
 
     </div>
@@ -547,12 +573,26 @@
   <section id="about" style="grid-template-columns: 1fr;">
     <div class="about-text">
       <h2>About</h2>
-      <p>
-        Each piece is handcrafted in Berlin with a strong focus on material diversity, structure, and functionality.
-      </p>
-      <p>
-        Combining contemporary silhouettes with thoughtful details, the work balances modern aesthetics, craftsmanship, and wearability.
-      </p>
+      <p>Fashion design student based in Berlin with a focus on garment construction, pattern making, and contemporary design.<br>Practical experience through atelier work, internship, and independent creative projects.</p>
+      <hr class="about-rule">
+      <h3 class="about-section">Education</h3>
+      <ul class="about-list">
+        <li>State-certified Fashion Designer — Modeschule Berlin (2023–2026)</li>
+      </ul>
+      <hr class="about-rule">
+      <h3 class="about-section">Experience</h3>
+      <ul class="about-list">
+        <li>Internship at Slacks Fashion, Berlin</li>
+        <li>Experience in garment construction, corsetry, alterations, and atelier support</li>
+      </ul>
+      <hr class="about-rule">
+      <h3 class="about-section">Skills</h3>
+      <ul class="about-list">
+        <li>Garment Construction</li>
+        <li>Pattern Making</li>
+        <li>Adobe Illustrator, InDesign &amp; Photoshop</li>
+        <li>Procreate</li>
+      </ul>
     </div>
   </section>
 
@@ -568,13 +608,16 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
         @paulaa.wb
       </a>
-      <a href="mailto:paula.wb@aol.com" style="color:var(--mid); font-size:0.75rem; letter-spacing:0.1em; text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--mid)'">paula.wb@aol.com</a>
+      <a href="mailto:paula.wb@aol.com" class="contact-link" style="display:inline-flex; align-items:center; gap:0.5rem; border-bottom:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        paula.wb@aol.com
+      </a>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <span>© 2025 Paula Werquet-Britzen</span>
+    <span>© 2026 Paula Werquet</span>
   </footer>
 
 </body>
