@@ -81,6 +81,7 @@
       grid-template-columns: 1fr 45vw;
       grid-template-rows: 1fr;
       padding-top: 6rem;
+      padding-right: 1.5rem;
     }
 
     .hero-label {
@@ -550,27 +551,27 @@
     <div class="video-grid">
 
       <div class="video-item">
-        <video src="video/video-output-CA9992EC-20E1-412B-8A66-E7AABAFC7DB4-1.mov" autoplay muted loop playsinline></video>
+        <video src="video/video-output-CA9992EC-20E1-412B-8A66-E7AABAFC7DB4-1.mov" autoplay muted loop playsinline preload="metadata"></video>
       </div>
 
       <div class="video-item">
-        <video src="video/video-output-33F94B60-7CBC-4930-A565-A54466CF8D9F-1.mov" autoplay muted loop playsinline></video>
+        <video src="video/video-output-33F94B60-7CBC-4930-A565-A54466CF8D9F-1.mov" autoplay muted loop playsinline preload="metadata"></video>
       </div>
 
       <div class="video-item">
-        <video src="video/video-output-29D8CFC2-F76A-4699-9075-52A099D44D9E-3.mov" autoplay muted loop playsinline></video>
+        <video src="video/video-output-29D8CFC2-F76A-4699-9075-52A099D44D9E-3.mov" autoplay muted loop playsinline preload="metadata"></video>
       </div>
 
       <div class="video-item">
-        <video src="video/IMG_9592.mov" autoplay muted loop playsinline></video>
+        <video src="video/IMG_9592.mov" autoplay muted loop playsinline preload="metadata"></video>
       </div>
 
       <div class="video-item">
-        <video src="video/video-output-6FA81461-A45D-4710-B276-1E6D2EAB4A80-1.mov" autoplay muted loop playsinline></video>
+        <video src="video/video-output-6FA81461-A45D-4710-B276-1E6D2EAB4A80-1.mov" autoplay muted loop playsinline preload="metadata"></video>
       </div>
 
       <div class="video-item">
-        <video src="video/IMG_9828.mov" autoplay muted loop playsinline></video>
+        <video src="video/IMG_9828.mov" autoplay muted loop playsinline preload="metadata"></video>
       </div>
 
     </div>
@@ -631,14 +632,19 @@
     const videos = document.querySelectorAll('video');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        const v = entry.target;
         if (entry.isIntersecting) {
-          entry.target.play();
+          v.play().catch(() => {});
         } else {
-          entry.target.pause();
+          v.pause();
         }
       });
-    }, { threshold: 0.3 });
-    videos.forEach(v => observer.observe(v));
+    }, { threshold: 0.1 });
+    videos.forEach(v => {
+      v.muted = true;
+      v.playsInline = true;
+      observer.observe(v);
+    });
   </script>
 
 </body>
