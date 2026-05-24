@@ -6,7 +6,7 @@
   <title>Portfolio — Paula Werquet</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -47,7 +47,7 @@
     .nav-name {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.4rem;
-      font-weight: 400;
+      font-weight: 700;
       font-style: normal;
       letter-spacing: 0.15em;
       text-transform: uppercase;
@@ -632,23 +632,21 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const videos = document.querySelectorAll('video');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          const v = entry.target;
-          if (entry.isIntersecting) {
-            v.play().catch(() => {});
-          } else {
-            v.pause();
-          }
-        });
-      }, { threshold: 0.1 });
-      videos.forEach(v => {
-        v.muted = true;
-        v.playsInline = true;
-        observer.observe(v);
+    const videos = document.querySelectorAll('video');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const v = entry.target;
+        if (entry.isIntersecting) {
+          v.play().catch(() => {});
+        } else {
+          v.pause();
+        }
       });
+    }, { threshold: 0.1 });
+    videos.forEach(v => {
+      v.muted = true;
+      v.playsInline = true;
+      observer.observe(v);
     });
   </script>
 
