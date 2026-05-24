@@ -557,7 +557,7 @@
       </div>
 
       <div class="video-item">
-        <video src="video/video-output-33F94B60-7CBC-4930-A565-A54466CF8D9F-1.mov" autoplay muted loop playsinline></video>
+        <video src="video/video-output-33F94B60-7CBC-4930-A565-A54466CF8D9F-1.mp4" autoplay muted loop playsinline></video>
       </div>
 
       <div class="video-item">
@@ -573,7 +573,7 @@
       </div>
 
       <div class="video-item">
-        <video src="video/IMG_9828.mov" autoplay muted loop playsinline></video>
+        <video src="video/IMG_9828.mp4" autoplay muted loop playsinline></video>
       </div>
 
     </div>
@@ -647,6 +647,10 @@
       v.playsInline = true;
       observer.observe(v);
     });
+    document.addEventListener('touchstart', function unlock() {
+      videos.forEach(v => { v.play().catch(() => {}); setTimeout(() => v.pause(), 10); });
+      document.removeEventListener('touchstart', unlock);
+    }, { once: true });
   </script>
 
 </body>
