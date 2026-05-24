@@ -48,6 +48,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.4rem;
       font-weight: 400;
+      font-style: normal;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       text-decoration: none;
@@ -325,7 +326,7 @@
     .about-img .icon { font-size: 2rem; opacity: 0.35; }
 
     .about-rule { border: none; border-top: 1px solid rgba(26,26,24,0.1); margin: 1.5rem 0; }
-    .about-section { font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.6rem; }
+    .about-section { font-family: 'Jost', sans-serif; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.6rem; }
     .about-list { list-style: none; color: var(--mid); font-size: 0.9rem; line-height: 1.8; }
     .about-list li::before { content: "•"; font-size: 1.1em; font-weight: 700; margin-right: 0.4rem; }
 
@@ -338,7 +339,7 @@
 
     #contact h2 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-size: clamp(2rem, 5vw, 4rem);
       font-weight: 300;
       margin-bottom: 1.5rem;
     }
@@ -387,9 +388,10 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
-      .hero { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-img { display: none; }
       .hero-title { font-size: clamp(3rem, 12vw, 5rem); }
+      .hero-text { padding-top: 1.5rem; padding-bottom: 1.5rem; }
 
       .grid { grid-template-columns: 1fr; }
       .grid-item--wide { grid-column: span 1; }
@@ -494,7 +496,7 @@
     <div class="grid">
 
       <a href="projekte/armor-within.html" class="grid-item">
-        <img src="img/armor-within-00073.jpeg" alt="Armor Within">
+        <img src="img/IMG_2914.JPG" alt="Armor Within">
         <div class="grid-caption"><h3>Armor Within</h3></div>
       </a>
 
@@ -529,8 +531,8 @@
       </a>
 
       <a href="projekte/alchimia-jacket.html" class="grid-item">
-        <img src="img/IMG_2896.JPG" alt="Alchimia Jacket" style="object-position: center 60%;">
-        <div class="grid-caption"><h3>Alchimia Jacket</h3></div>
+        <img src="img/IMG_2896.JPG" alt="Shell Jacket" style="object-position: center 60%;">
+        <div class="grid-caption"><h3>Shell Jacket</h3></div>
       </a>
 
       <a href="projekte/upcycling.html" class="grid-item">
@@ -555,7 +557,7 @@
       </div>
 
       <div class="video-item">
-        <video src="video/video-output-33F94B60-7CBC-4930-A565-A54466CF8D9F-1.mov" autoplay muted loop playsinline preload="metadata"></video>
+        <video src="video/video-output-33F94B60-7CBC-4930-A565-A54466CF8D9F-1.mp4" autoplay muted loop playsinline preload="metadata"></video>
       </div>
 
       <div class="video-item">
@@ -591,7 +593,7 @@
       <h3 class="about-section">Experience</h3>
       <ul class="about-list">
         <li>Internship at Slacks Fashion, Berlin</li>
-        <li>Experience in garment construction, corsetry, alterations, and atelier support</li>
+        <li>Experience in garment construction, corsetry, alterations and atelier support</li>
       </ul>
       <hr class="about-rule">
       <h3 class="about-section">Skills</h3>
