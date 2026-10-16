@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Orders &amp; Inquiries — Werquet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --cream: #ffffff; --ink: #1a1a18; --mid: #8a8880; --gap: clamp(2rem, 5vw, 5rem); }
+    html { scroll-behavior: smooth; }
+    body { background: var(--cream); color: var(--ink); font-family: 'Jost', sans-serif; font-weight: 300; font-size: 15px; letter-spacing: 0.03em; line-height: 1.7; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 0 1rem 1.5rem; background: var(--cream); border-bottom: 1px solid rgba(26,26,24,0.1); }
+    .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; font-style: normal; letter-spacing: 0.15em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; padding-right: 1.5rem; }
+    .nav-links a { text-decoration: none; color: var(--mid); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .project-header { padding: calc(6rem + 1.5rem) 0 1.5rem 1.5rem; }
+    .project-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 300; line-height: 1; }
+    .project-desc { padding: 0 0 1.5rem 1.5rem; max-width: 600px; color: var(--mid); font-size: 0.9rem; line-height: 1.8; }
+    .project-grid { padding: 0 1.5rem 3rem 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .project-grid-item { overflow: hidden; background: #e0dbd2; aspect-ratio: 3/4; }
+    .project-grid-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+    .project-grid-item:hover img { transform: scale(1.03); }
+    .placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--mid); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--mid); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 0 1.5rem 1.5rem; transition: color 0.2s; background: none; border: none; cursor: pointer; font-family: inherit; font-weight: inherit; }
+    .back-link:hover { color: var(--ink); }
+    footer { padding: 1.5rem; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--mid); border-top: 1px solid rgba(26,26,24,0.08); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 0 1rem 1.5rem; height: 6rem; background: var(--cream); border-bottom: 1px solid rgba(26,26,24,0.1); }
+    .hamburger { display: none; }
+    @media (max-width: 960px) {
+      .project-grid { grid-template-columns: 1fr; }
+      nav { height: 6.5rem; padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; flex-direction: column; position: fixed; top: 6.5rem; right: 1.5rem; left: auto; width: fit-content; background: var(--cream); padding: 1.2rem 1.8rem; gap: 1.2rem; border: 1px solid rgba(26,26,24,0.1); z-index: 99; }
+      .nav-links.open { display: flex; }
+      .project-header { padding-right: 1.5rem; }
+      .project-desc { padding-right: 1.5rem; }
+      .project-grid { padding-right: 1.5rem; }
+      .back-link { padding-right: 1.5rem; }
+      footer { padding-right: 1.5rem; }
+      .nav-name { font-size: 1.1rem; }
+      .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 0; }
+      .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); }
+    }
+    /* ── Rausgezoomt: schmale Spalte in der Bildschirmmitte (nur Desktop) ── */
+    @media (min-width: 961px) {
+      .project-header, .project-desc, .project-grid { max-width: 600px; margin-left: auto; margin-right: auto; padding-left: 0; padding-right: 0; }
+      .project-header h1 { font-size: clamp(2rem, 3.5vw, 3.25rem); }
+      .project-grid { gap: 1rem; }
+      .back-link { display: flex; width: 100%; max-width: 600px; margin: 0 auto; padding-left: 0; padding-right: 0; }
+    }
+    /* ── Sprachumschalter DE / EN ── */
+    .lang-switch { display: flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--mid); }
+    .lang-switch button { background: none; border: none; padding: 0; font: inherit; letter-spacing: inherit; text-transform: uppercase; color: var(--mid); cursor: pointer; transition: color 0.2s; }
+    .lang-switch button:hover, .lang-switch button.active { color: var(--ink); }
+    /* ── Seite Custom Orders ── */
+    .project-header h1 { white-space: nowrap; font-size: clamp(1.5rem, 6.5vw, 2.6rem) !important; } /* Titel immer in einer Zeile */
+    .co-heading { font-family: 'Jost', sans-serif; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); padding: 1.5rem 1.5rem 0.6rem; }
+    .co-list { color: var(--mid); font-size: 0.9rem; line-height: 1.8; padding: 0 1.5rem 0 3rem; }
+    .co-note { color: var(--mid); font-size: 0.9rem; line-height: 1.8; padding: 2rem 1.5rem 0; }
+    .co-cta { padding: 1rem 1.5rem 3rem; }
+    .co-mail { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--ink); font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+    .co-mail:hover { color: var(--mid); }
+    .co-mail svg { width: 18px; height: 18px; }
+    @media (min-width: 961px) {
+      .co-heading, .co-list, .co-note, .co-cta { max-width: 600px; margin-left: auto; margin-right: auto; padding-left: 0; padding-right: 0; }
+      .co-list { padding-left: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html" class="nav-name">WERQUET</a>
+    <a href="../index.html" style="position:absolute; left:50%; transform:translateX(-50%);"><img src="../img/web/IMG_2625.jpg" alt="Logo" style="height:6rem; width:auto; display:block;"></a>
+    <ul class="nav-links" id="nav-links">
+      <li class="lang-switch"><button type="button" data-lang="de">DE</button><span aria-hidden="true">/</span><button type="button" data-lang="en">EN</button></li>
+      <li><a href="../index.html#work" data-de="Arbeiten">Work</a></li>
+      <li><a href="videos.html">Visuals</a></li>
+      <li><a href="../index.html#about" data-de="Über mich">About</a></li>
+      <li><a href="../index.html#contact" data-de="Kontakt">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menue" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+  <div class="project-header"><h1 data-de="Maßanfertigungen &amp;amp; Anfragen">Custom Orders &amp; Inquiries</h1></div>
+  <!-- ENTWURF: Texte hier nach Belieben anpassen. Englisch steht im Text, Deutsch im Attribut data-de. -->
+  <h2 class="co-heading" data-de="Was ich anbiete">What I offer</h2>
+  <ul class="co-list">
+    <li data-de="Maßanfertigungen und Einzelstücke">Custom garments and one-of-a-kind pieces</li>
+    <li data-de="Änderungen und Umgestaltung bestehender Teile">Alterations and redesign of existing pieces</li>
+    <li data-de="Unterstützung für Designerinnen, Designer und Labels">Support for designers and labels</li>
+    <li data-de="Schnitterstellung und Musterteile">Pattern making and sample pieces</li>
+    <li data-de="Kleine Produktionen von Kleidungsstücken">Small production runs of garments</li>
+    <li data-de="Kooperationen">Collaborations</li>
+    <li data-de="Leihgaben für Shootings und Events">Loans for photo shoots and events</li>
+  </ul>
+  <p class="co-note" data-de="Für unverbindliche Anfragen schick mir einfach eine E-Mail.">For non-binding inquiries, simply send me an email.</p>
+  <div class="co-cta">
+    <a href="mailto:contact.werquet@gmail.com?subject=Custom%20Order%20%2F%20Inquiry" class="co-mail">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+      <span>contact.werquet@gmail.com</span>
+    </a>
+  </div>
+  <button onclick="history.back()" class="back-link" data-de="← Zurück zur Übersicht">← Back to overview</button>
+  <script>
+    document.querySelectorAll('#nav-links a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        document.getElementById('nav-links').classList.remove('open');
+      });
+    });
+  </script>
+  <script src="../lang.js"></script>
+</body>
+</html>

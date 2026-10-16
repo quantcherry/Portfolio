@@ -44,17 +44,39 @@
       .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 0; }
       .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); }
     }
+    /* ── Rausgezoomt: schmale Spalte in der Bildschirmmitte (nur Desktop) ── */
+    @media (min-width: 961px) {
+      .project-header, .project-desc, .project-grid { max-width: 600px; margin-left: auto; margin-right: auto; padding-left: 0; padding-right: 0; }
+      .project-header h1 { font-size: clamp(2rem, 3.5vw, 3.25rem); }
+      .project-grid { gap: 1rem; }
+      .back-link { display: flex; width: 100%; max-width: 600px; margin: 0 auto; padding-left: 0; padding-right: 0; }
+    }
+    /* ── Sprachumschalter DE / EN ── */
+    .lang-switch { display: flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--mid); }
+    .lang-switch button { background: none; border: none; padding: 0; font: inherit; letter-spacing: inherit; text-transform: uppercase; color: var(--mid); cursor: pointer; transition: color 0.2s; }
+    .lang-switch button:hover, .lang-switch button.active { color: var(--ink); }
+    /* ── 3 Bilder nebeneinander (Desktop); unvollständige letzte Reihe wird mittig gesetzt ── */
+    @media (min-width: 961px) {
+      .project-header, .project-desc, .project-grid, .back-link { max-width: 840px; }
+      .project-grid { grid-template-columns: repeat(6, 1fr); }
+      .project-grid > .project-grid-item { grid-column: span 2; }
+      .project-grid > .project-grid-item:last-child:nth-child(3n+1) { grid-column: 3 / span 2; }
+      .project-grid > .project-grid-item:nth-last-child(2):nth-child(3n+1) { grid-column: 2 / span 2; }
+      .project-grid > .project-grid-item:last-child:nth-child(3n+2) { grid-column: 4 / span 2; }
+      .project-grid > .pg-center { grid-column: 3 / span 2; }
+    }
   </style>
 </head>
 <body>
   <nav>
     <a href="../index.html" class="nav-name">WERQUET</a>
-    <a href="../index.html" style="position:absolute; left:50%; transform:translateX(-50%);"><img src="../img/IMG_2625.JPG" alt="Logo" style="height:6rem; width:auto; display:block;"></a>
+    <a href="../index.html" style="position:absolute; left:50%; transform:translateX(-50%);"><img src="../img/web/IMG_2625.jpg" alt="Logo" style="height:6rem; width:auto; display:block;"></a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="../index.html#work">Work</a></li>
+      <li class="lang-switch"><button type="button" data-lang="de">DE</button><span aria-hidden="true">/</span><button type="button" data-lang="en">EN</button></li>
+      <li><a href="../index.html#work" data-de="Arbeiten">Work</a></li>
       <li><a href="videos.html">Visuals</a></li>
-      <li><a href="../index.html#about">About</a></li>
-      <li><a href="../index.html#contact">Contact</a></li>
+      <li><a href="../index.html#about" data-de="Über mich">About</a></li>
+      <li><a href="../index.html#contact" data-de="Kontakt">Contact</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menue" onclick="document.getElementById('nav-links').classList.toggle('open')">
       <span></span>
@@ -63,23 +85,22 @@
     </button>
   </nav>
   <div class="project-header"><h1>Denim</h1></div>
-  <p class="project-desc">Different types of heavy denim.</p>
+  <p class="project-desc" data-de="Verschiedene Arten von schwerem Denim.">Different types of heavy denim.</p>
   <div class="project-grid">
-    <div class="project-grid-item"><img src="../img/denim-00003.jpeg" alt="Denim"></div>
-    <div class="project-grid-item"><img src="../img/denim-00001.jpeg" alt="Denim"></div>
-    <div class="project-grid-item"><img src="../img/denim-00002.jpeg" alt="Denim"></div>
-    <div class="project-grid-item"><img src="../img/denim-00004.jpeg" alt="Denim"></div>
-    <div class="project-grid-item"><img src="../img/denim-00005.jpeg" alt="Denim"></div>
-    <div class="project-grid-item"><img src="../img/denim-00006.jpeg" alt="Denim"></div>
-    <div class="project-grid-item"><img src="../img/denim-00007.jpeg" alt="Denim"></div>
-    <div class="project-grid-item"><img src="../img/denim-00008.jpeg" alt="Denim"></div>
-    <div class="project-grid-item"><img src="../img/denim-00011.jpeg" alt="Denim"></div>
-    <div class="project-grid-item"><img src="../img/denim-00010.jpeg" alt="Denim"></div>
-    <div class="project-grid-item"><img src="../img/denim-00014.jpeg" alt="Denim"></div>
-    <div class="project-grid-item"><img src="../img/denim-00012.jpeg" alt="Denim"></div>
+    <div class="project-grid-item"><img src="../img/web/denim-00003.jpg" decoding="async" alt="Denim"></div>
+    <div class="project-grid-item"><img src="../img/web/denim-00001.jpg" decoding="async" alt="Denim"></div>
+    <div class="project-grid-item"><img src="../img/web/denim-00002.jpg" decoding="async" alt="Denim"></div>
+    <div class="project-grid-item"><img src="../img/web/denim-00004.jpg" loading="lazy" decoding="async" alt="Denim"></div>
+    <div class="project-grid-item"><img src="../img/web/denim-00005.jpg" loading="lazy" decoding="async" alt="Denim"></div>
+    <div class="project-grid-item"><img src="../img/web/denim-00006.jpg" loading="lazy" decoding="async" alt="Denim"></div>
+    <div class="project-grid-item"><img src="../img/web/denim-00007.jpg" loading="lazy" decoding="async" alt="Denim"></div>
+    <div class="project-grid-item"><img src="../img/web/denim-00008.jpg" loading="lazy" decoding="async" alt="Denim"></div>
+    <div class="project-grid-item"><img src="../img/web/denim-00011.jpg" loading="lazy" decoding="async" alt="Denim"></div>
+    <div class="project-grid-item"><img src="../img/web/denim-00010.jpg" loading="lazy" decoding="async" alt="Denim"></div>
+    <div class="project-grid-item"><img src="../img/web/denim-00014.jpg" loading="lazy" decoding="async" alt="Denim"></div>
+    <div class="project-grid-item"><img src="../img/web/denim-00012.jpg" loading="lazy" decoding="async" alt="Denim"></div>
   </div>
-  <button onclick="history.back()" class="back-link">← Zurück zur Übersicht</button>
-  <footer><span>© 2026 Paula Werquet</span></footer>
+  <button onclick="history.back()" class="back-link" data-de="← Zurück zur Übersicht">← Back to overview</button>
   <script>
     document.querySelectorAll('#nav-links a').forEach(function(link) {
       link.addEventListener('click', function() {
@@ -87,5 +108,6 @@
       });
     });
   </script>
+  <script src="../lang.js"></script>
 </body>
 </html>

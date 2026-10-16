@@ -47,17 +47,22 @@
       .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 0; }
       .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); }
     }
+    /* ── Sprachumschalter DE / EN ── */
+    .lang-switch { display: flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--mid); }
+    .lang-switch button { background: none; border: none; padding: 0; font: inherit; letter-spacing: inherit; text-transform: uppercase; color: var(--mid); cursor: pointer; transition: color 0.2s; }
+    .lang-switch button:hover, .lang-switch button.active { color: var(--ink); }
   </style>
 </head>
 <body>
   <nav>
     <a href="../index.html" class="nav-name">WERQUET</a>
-    <a href="../index.html" style="position:absolute; left:50%; transform:translateX(-50%);"><img src="../img/IMG_2625.JPG" alt="Logo" style="height:6rem; width:auto; display:block;"></a>
+    <a href="../index.html" style="position:absolute; left:50%; transform:translateX(-50%);"><img src="../img/web/IMG_2625.jpg" alt="Logo" style="height:6rem; width:auto; display:block;"></a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="../index.html#work">Work</a></li>
+      <li class="lang-switch"><button type="button" data-lang="de">DE</button><span aria-hidden="true">/</span><button type="button" data-lang="en">EN</button></li>
+      <li><a href="../index.html#work" data-de="Arbeiten">Work</a></li>
       <li><a href="videos.html">Visuals</a></li>
-      <li><a href="../index.html#about">About</a></li>
-      <li><a href="../index.html#contact">Contact</a></li>
+      <li><a href="../index.html#about" data-de="Über mich">About</a></li>
+      <li><a href="../index.html#contact" data-de="Kontakt">Contact</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menue" onclick="document.getElementById('nav-links').classList.toggle('open')">
       <span></span>
@@ -69,26 +74,25 @@
   <div class="video-section">
 
     <div class="video-item wide">
-      <!-- <video src="../video/showreel.mp4" poster="../img/poster1.jpg" controls muted playsinline></video> -->
+      <!-- <video src="../video/web/showreel.mp4" poster="../video/web/showreel.jpg" poster="../img/poster1.jpg" controls muted playsinline></video> -->
       <div class="placeholder wide">Showreel</div>
       <div class="video-label">Showreel</div>
     </div>
 
     <div class="video-item">
-      <!-- <video src="../video/lookbook1.mp4" poster="../img/poster2.jpg" controls muted playsinline></video> -->
+      <!-- <video src="../video/web/lookbook1.mp4" poster="../video/web/lookbook1.jpg" poster="../img/poster2.jpg" controls muted playsinline></video> -->
       <div class="placeholder">Lookbook 1</div>
       <div class="video-label">Lookbook 1</div>
     </div>
 
     <div class="video-item">
-      <!-- <video src="../video/lookbook2.mp4" poster="../img/poster3.jpg" controls muted playsinline></video> -->
+      <!-- <video src="../video/web/lookbook2.mp4" poster="../video/web/lookbook2.jpg" poster="../img/poster3.jpg" controls muted playsinline></video> -->
       <div class="placeholder">Lookbook 2</div>
       <div class="video-label">Lookbook 2</div>
     </div>
 
   </div>
-  <a href="../index.html" class="back-link">← Zurück zur Übersicht</a>
-  <footer><span>© 2026 Paula Werquet</span></footer>
+  <a href="../index.html" class="back-link" data-de="← Zurück zur Übersicht">← Back to overview</a>
   <script>
     document.querySelectorAll('#nav-links a').forEach(function(link) {
       link.addEventListener('click', function() {
@@ -96,5 +100,6 @@
       });
     });
   </script>
+  <script src="../lang.js"></script>
 </body>
 </html>

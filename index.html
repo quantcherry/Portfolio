@@ -75,108 +75,114 @@
 
     .hamburger { display: none; }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100svh;
-      display: grid;
-      grid-template-columns: 1fr 45vw;
-      grid-template-rows: 1fr;
-      padding-top: 6rem;
-      padding-right: 1.5rem;
+    /* ── STAGE (Slider-Startseite) ── */
+    .stage {
+      padding: calc(6rem + 5.75rem) 0 var(--gap) 0;
     }
 
-    .hero-label {
+    .stage-intro {
+      text-align: center;
+      padding: 0 1.5rem;
+      margin: 0;
       font-size: 0.72rem;
-      letter-spacing: 0.2em;
+      font-weight: 400;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 1rem;
+      color: var(--ink);
     }
 
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.5rem, 5vw, 5rem);
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
+    .stage-intro span { color: var(--mid); }
 
-    .hero-title em {
-      font-style: italic;
-      color: var(--mid);
-    }
-
-    .hero-sub {
-      margin-top: 2rem;
-      color: var(--mid);
-      font-size: 0.9rem;
-      line-height: 1.8;
-    }
-
-    .hero-text {
+    /* E-Mail-Button oben: gleicher Stil wie die Kontakt-Links, nur größer */
+    /* mittig zwischen Header und Kollektionen: gleicher Abstand oben (.stage) und unten */
+    .stage-cta {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 3rem 2rem 3rem 1.5rem;
+      flex-direction: column;   /* Icon oben (führt zur E-Mail), Schrift darunter (führt zur Seite Custom Orders) */
+      align-items: center;
+      gap: 0.8rem;
+      text-align: center;
+      margin-bottom: 5.75rem;
+    }
+    .stage-cta .cta-icon { display: inline-flex; color: var(--ink); transition: color 0.2s; }
+    .stage-cta .cta-icon:hover { color: var(--mid); }
+    .stage-cta .cta-icon svg { width: 20px; height: 20px; }
+    .stage-cta .contact-link {
+      display: inline-flex;
+      flex-direction: column;   /* Icon oben, Schrift darunter */
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;   /* enger als die übrigen Links (0.15em) */
+      border-bottom: none;
+    }
+    .stage-cta .contact-link svg { width: 20px; height: 20px; }
+
+    .row {
+      margin-bottom: 3rem;
+      scroll-margin-top: 7rem;
     }
 
-    .hero-img {
-      position: relative;
-      background: #e8e2d9;
-      overflow: hidden;
-    }
-
-    .hero-img .icon { font-size: 2rem; opacity: 0.4; }
-
-    /* ── SECTION HEADER ── */
-    .section-header {
+    .row-head {
       display: flex;
       align-items: baseline;
-      gap: 1.5rem;
-      margin-bottom: clamp(2rem, 4vw, 4rem);
-    }
-
-    .section-header h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 300;
-    }
-
-    .section-header span {
+      gap: 1rem;
+      padding: 0 1.5rem;
+      margin-bottom: 0.9rem;
       font-size: 0.72rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--mid);
     }
 
-    /* ── WORK GRID ── */
-    #work {
-      padding: calc(var(--gap) + 2rem) 1.5rem var(--gap) 1.5rem;
+    .row-head .num { color: var(--mid); }
+
+    .row-head h2 {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      color: var(--ink);
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .row-head .meta { color: var(--mid); }
+
+    .track-wrap {
+      position: relative;
+      --row-h: clamp(200px, 30vh, 340px);
+    }
+
+    .track {
+      display: flex;
       gap: 1.2rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding: 0 1.5rem;
+      scroll-behavior: smooth;
+      padding: 0 1.5rem;
+      scrollbar-width: none;
     }
 
-    .grid-item {
+    .track::-webkit-scrollbar { display: none; }
+
+    /* Abstand rechts am Ende der Reihe */
+    .track::after { content: ""; flex: 0 0 0.3rem; }
+
+    .slide {
+      flex: 0 0 auto;
+      height: var(--row-h);
+      aspect-ratio: 3/4;
       position: relative;
       overflow: hidden;
       background: #e0dbd2;
-      cursor: pointer;
+      scroll-snap-align: start;
+      display: block;
       text-decoration: none;
       color: inherit;
-      display: block;
     }
 
-    /* Verschiedene Größen für visuelles Gewicht */
-    .grid-item { aspect-ratio: 3/4; }
-    .grid-item--wide { grid-column: span 2; }
+    .slide--video { aspect-ratio: 3/4; } /* gleiches Format wie die Fotoreihe; Videos werden mittig zugeschnitten */
 
-    .grid-item img,
-    .grid-item video {
+    .slide img,
+    .slide video {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -184,103 +190,194 @@
       transition: transform 0.6s ease;
     }
 
-    .grid-item:hover img,
-    .grid-item:hover video { transform: scale(1.03); }
+    .slide:hover img { transform: scale(1.03); }
 
-    /* Platzhalter-Stil wenn noch kein Bild */
-    .placeholder {
+    /* Platzhalter-Kachel, solange ein Album noch keine Fotos hat */
+    .slide-ph {
       width: 100%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      gap: 0.5rem;
+      text-align: center;
+      padding: 1rem;
       color: var(--mid);
       font-size: 0.7rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      background: #e0dbd2;
     }
 
-    .placeholder .icon { font-size: 1.8rem; opacity: 0.35; }
-
-    /* Hover-Overlay */
-    .grid-caption {
+    /* Hover-Overlay mit Kollektionsname */
+    .slide-caption {
       position: absolute;
       inset: 0;
       background: rgba(26,26,24,0.55);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 1.5rem;
+      padding: 1rem;
       opacity: 0;
       transition: opacity 0.3s ease;
     }
 
-    .grid-item:hover .grid-caption { opacity: 1; }
+    .slide:hover .slide-caption,
+    .slide:focus-visible .slide-caption { opacity: 1; }
 
-    .grid-caption h3 {
+    .slide-caption h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 300;
+      line-height: 1.15;
       color: var(--cream);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
     }
 
-    .grid-caption p {
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(247,244,239,0.6);
-      margin-top: 0.25rem;
+    /* Bei Videos keinen Namen und keinen Pfeil zeigen (Klick führt trotzdem zur Kollektion) */
+    .slide--video .slide-caption { display: none; }
+
+    /* Pfeil rechts neben dem Titel: zeigt, dass die Kachel zum Album führt */
+    .slide-caption h3::after {
+      content: "";
+      flex: 0 0 auto;
+      width: 0.95em;
+      height: 0.95em;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='4' y1='12' x2='20' y2='12'/%3E%3Cpolyline points='14,6 20,12 14,18'/%3E%3C/svg%3E") center / contain no-repeat;
+      transform: translateX(-4px);
+      transition: transform 0.3s ease;
     }
 
-    /* ── VIDEO SECTION ── */
-    #video {
-      padding: calc(var(--gap) * 1.5) 1.5rem var(--gap) 1.5rem;
-    }
+    .slide:hover .slide-caption h3::after,
+    .slide:focus-visible .slide-caption h3::after { transform: translateX(0); }
 
-    .video-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.2rem;
-    }
-
-    .video-item {
-      background: #e0dbd2;
-      position: relative;
-    }
-
-    .video-item video {
-      width: 100%;
-      display: block;
-      aspect-ratio: 9/16;
-      object-fit: cover;
-    }
-
-    .video-item.wide {
-      grid-column: span 2;
-    }
-
-    .video-item.wide video {
-      aspect-ratio: 16/9;
-    }
-
-    .video-placeholder {
-      aspect-ratio: 9/16;
+    /* Transparenter Pfeil nach rechts */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      right: 1.5rem;
+      transform: translateY(-50%);
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      border: 1px solid rgba(26,26,24,0.18);
+      background: rgba(255,255,255,0.35);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      color: var(--ink);
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
-      gap: 0.5rem;
-      color: var(--mid);
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      z-index: 2;
     }
 
-    .video-placeholder.wide-ph { aspect-ratio: 16/9; }
-    .video-placeholder .icon { font-size: 2.2rem; opacity: 0.35; }
+    .arrow[hidden] { display: none; }
+
+    .arrow:hover {
+      background: rgba(255,255,255,0.7);
+      border-color: rgba(26,26,24,0.35);
+    }
+
+    .arrow:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+    .arrow svg { width: 1.1rem; height: 1.1rem; }
+
+    /* ── Beide Reihen: zentriert, genau 5 Kacheln sichtbar, endlos ── */
+    .row { margin-bottom: 6rem; }
+    #work { margin-bottom: 9rem; }
+
+    .row .row-head,
+    .row .track-wrap {
+      width: min(1040px, calc(100% - 10rem));
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .row .row-head { padding-left: 0; padding-right: 0; }
+
+    .row .track {
+      padding: 1.75rem 0;   /* Platz nach oben/unten für die vergrößerte Mitte */
+      scroll-padding: 0;
+    }
+
+    /* Kachel in der Mitte wird vergrößert */
+    .row .slide { transition: transform 0.6s ease; }
+    .row .slide.is-center { transform: scale(1.18); z-index: 1; }
+    /* Name (und Pfeil) der mittleren Kachel automatisch einblenden */
+    .row .slide.is-center .slide-caption { opacity: 1; }
+    .row .slide.is-center .slide-caption h3::after { transform: translateX(0); }
+    .row .track.no-anim .slide { transition: none; }
+
+    .row .track::after { display: none; }
+
+    .row .slide {
+      height: auto;
+      flex: 0 0 calc((100% - 4 * 1.2rem) / 5);
+    }
+
+    /* Pfeile links und rechts neben der Reihe */
+    .row .arrow { right: -4rem; }
+    .row .arrow--prev { right: auto; left: -4rem; }
+
+    /* ── INTRO: Startbildschirm, 6 Sekunden, nur beim ersten Aufruf pro Browser-Tab ── */
+    .intro {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+    .intro.is-hidden { opacity: 0; visibility: hidden; }
+
+    /* Logo und Schrift mittig untereinander */
+    .intro { flex-direction: column; gap: 2.5rem; }
+
+    /* Ausschnitt nur um die Kugeln (das Logo-Bild hat viel weißen Rand) */
+    .intro-logo {
+      position: relative;
+      width: min(40vw, 560px);
+      aspect-ratio: 1830 / 1095;
+      overflow: hidden;
+      opacity: 0;
+      animation: introIn 1.4s ease 0.1s forwards;
+    }
+    .intro-logo img {
+      position: absolute;
+      width: 180.33%;
+      height: auto;
+      left: -40.16%;
+      top: -69.41%;
+    }
+
+    .intro-tag {
+      font-size: clamp(0.72rem, 1vw, 0.9rem);
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-align: center;
+      padding: 0 1.5rem;
+      opacity: 0;
+      animation: introIn 1.4s ease 0.8s forwards;
+    }
+    .intro-tag span { white-space: nowrap; }
+    @media (max-width: 600px) {
+      .intro { gap: 2rem; }
+      .intro-logo { width: 78vw; }
+      .intro-tag .sep { display: none; }
+      .intro-tag span:not(.sep) { display: block; }
+      .intro-tag span + span + span { margin-top: 0.4rem; }
+    }
+    @keyframes introIn { from { opacity: 0; } to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .intro-logo, .intro-tag { animation: none; opacity: 1; }
+    }
 
     /* ── ABOUT ── */
     #about {
@@ -329,6 +426,14 @@
     .about-section { font-family: 'Jost', sans-serif; font-size: 0.82rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.6rem; }
     .about-list { list-style: none; color: var(--mid); font-size: 0.9rem; line-height: 1.8; }
     .about-list li::before { content: "•"; font-size: 1.1em; font-weight: 700; margin-right: 0.4rem; }
+
+    /* About zentriert */
+    #about .about-text {
+      text-align: center;
+      max-width: 760px;
+      width: 100%;
+      margin: 0 auto;
+    }
 
     /* ── CONTACT ── */
     #contact {
@@ -388,29 +493,31 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-img { display: none; }
-      .hero-title { font-size: clamp(3rem, 12vw, 5rem); }
-      .hero-text { padding-top: 1.5rem; padding-bottom: 1.5rem; }
 
-      .grid { grid-template-columns: 1fr; }
-      .grid-item--wide { grid-column: span 1; }
-      .video-grid { grid-template-columns: 1fr; }
-      .video-item.wide { grid-column: span 1; }
 
+      .track-wrap { --row-h: clamp(220px, 34vh, 320px); }
+      .slide-caption { opacity: 1; background: linear-gradient(to top, rgba(26,26,24,0.55), rgba(26,26,24,0) 55%); }
+      .arrow { width: 2.6rem; height: 2.6rem; right: 1rem; }
+      .stage { padding-top: calc(6.5rem + 3rem); }
+      .row { margin-bottom: 4rem; }
+      #work { margin-bottom: 6rem; }
+      .stage-cta { margin-bottom: 3rem; }
+      .stage-cta .contact-link { font-size: 0.82rem; }
+      .row .row-head, .row .track-wrap { width: calc(100% - 3rem); }
+      .row .slide { flex-basis: calc((100% - 1.2rem) / 2); }
+      .row .slide.is-center { transform: none; }
+      .row .track { padding: 0; }
+      .row .arrow { right: 0.5rem; }
+      .row .arrow--prev { right: auto; left: 0.5rem; }
       #about { grid-template-columns: 1fr; }
       .about-img { order: -1; aspect-ratio: 4/3; }
 
       nav { padding: 1.2rem 1.5rem; height: 6.5rem; }
       .nav-name { font-size: 1.1rem; }
       .nav-links { top: 6.5rem; }
-      .grid-caption { opacity: 1; }
-      #work { padding-right: 1.5rem; }
-      #video { padding-right: 1.5rem; }
       #about { padding-right: 1.5rem; }
       #contact { padding-right: 1.5rem; }
       footer { padding-right: 1.5rem; }
-      .hero-text { padding-right: 1.5rem; }
       .nav-links {
         display: none;
         flex-direction: column;
@@ -443,19 +550,52 @@
         transition: all 0.3s ease;
       }
     }
+    /* ── Sprachumschalter DE / EN ── */
+    .lang-switch { display: flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--mid); }
+    .lang-switch button { background: none; border: none; padding: 0; font: inherit; letter-spacing: inherit; text-transform: uppercase; color: var(--mid); cursor: pointer; transition: color 0.2s; }
+    .lang-switch button:hover, .lang-switch button.active { color: var(--ink); }
   </style>
 </head>
 <body>
 
+  <!-- INTRO -->
+  <div class="intro" id="intro" role="button" tabindex="0" aria-label="Enter">
+    <div class="intro-logo"><img src="img/web/IMG_2625.jpg" alt=""></div>
+    <div class="intro-tag" data-de="&lt;span&gt;Design-Portfolio&lt;/span&gt;&lt;span class=&quot;sep&quot;&gt; — &lt;/span&gt;&lt;span&gt;Paula Werquet-Britzen&lt;/span&gt;"><span>Design Portfolio</span><span class="sep"> — </span><span>Paula Werquet-Britzen</span></div>
+  </div>
+  <script>
+    // Intro 6 Sekunden zeigen, dann ausblenden. Klick oder Enter überspringt.
+    // Nicht erneut zeigen, wenn man im selben Tab zurückkommt oder über einen Menülink (#work …) kommt.
+    (function () {
+      var el = document.getElementById('intro');
+      var seen = false;
+      try { seen = sessionStorage.getItem('werquet-intro') === '1'; } catch (e) {}
+      if (seen || location.hash) { el.parentNode.removeChild(el); return; }
+      document.documentElement.style.overflow = 'hidden';
+      var timer = setTimeout(done, 6000);
+      function done() {
+        clearTimeout(timer);
+        if (!el.parentNode || el.classList.contains('is-hidden')) return;
+        el.classList.add('is-hidden');
+        document.documentElement.style.overflow = '';
+        try { sessionStorage.setItem('werquet-intro', '1'); } catch (e) {}
+        setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 1000);
+      }
+      el.addEventListener('click', done);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === 'Escape') done(); });
+    })();
+  </script>
+
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-name">WERQUET</a>
-    <a href="#" style="position:absolute; left:50%; transform:translateX(-50%);"><img src="img/IMG_2625.JPG" alt="Logo" style="height:6rem; width:auto; display:block;"></a>
+    <a href="#" style="position:absolute; left:50%; transform:translateX(-50%);"><img src="img/web/IMG_2625.jpg" alt="Logo" style="height:6rem; width:auto; display:block;"></a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#work">Work</a></li>
+      <li class="lang-switch"><button type="button" data-lang="de">DE</button><span aria-hidden="true">/</span><button type="button" data-lang="en">EN</button></li>
+      <li><a href="#work" data-de="Arbeiten">Work</a></li>
       <li><a href="#video">Visuals</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#about" data-de="Über mich">About</a></li>
+      <li><a href="#contact" data-de="Kontakt">Contact</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menü" onclick="document.getElementById('nav-links').classList.toggle('open')">
       <span></span>
@@ -472,144 +612,254 @@
     });
   </script>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-text">
-      <h1 class="hero-title">
-        Fashion Design<br>
-        <em>Portfolio</em>
-      </h1>
-      <p class="hero-sub">by Paula Werquet</p>
-    </div>
-    <div class="hero-img">
-      <img src="img/denim-00005.jpeg" alt="Hero" style="width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block;">
-    </div>
-  </section>
-
-  <!-- WORK -->
-  <section id="work">
-    <div class="section-header">
-      <h2>Selected Work</h2>
-      <span>2025 – 2026</span>
+  <!-- STAGE -->
+  <main class="stage">
+    <div class="stage-cta">
+      <a href="mailto:contact.werquet@gmail.com?subject=Custom%20Order%20%2F%20Inquiry" class="cta-icon" aria-label="E-Mail">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+      </a>
+      <a href="projekte/custom-orders.html" class="contact-link">
+        <span data-de="Maßanfertigungen &amp;amp; Anfragen">Custom Orders &amp; Inquiries</span>
+      </a>
     </div>
 
-    <div class="grid">
-
-      <a href="projekte/armor-within.html" class="grid-item">
-        <img src="img/IMG_2914.JPG" alt="Armor Within">
-        <div class="grid-caption"><h3>Armor Within</h3></div>
-      </a>
-
-      <a href="projekte/morphoskin.html" class="grid-item">
-        <img src="img/morphoskin-00025.jpeg" alt="Morphoskin">
-        <div class="grid-caption"><h3>Morphoskin</h3></div>
-      </a>
-
-      <a href="projekte/denim.html" class="grid-item">
-        <img src="img/denim-00006.jpeg" alt="Denim">
-        <div class="grid-caption"><h3>Denim</h3></div>
-      </a>
-
-      <a href="projekte/corset.html" class="grid-item">
-        <img src="img/corset-00028.jpeg" alt="Corset">
-        <div class="grid-caption"><h3>Corset</h3></div>
-      </a>
-
-      <a href="projekte/red-leather-two-piece.html" class="grid-item">
-        <img src="img/red-leather-two-piece-00066.jpeg" alt="Leather Two Piece" style="object-position: center top;">
-        <div class="grid-caption"><h3>Leather Two Piece</h3></div>
-      </a>
-
-      <a href="projekte/drawing.html" class="grid-item">
-        <img src="img/drawing-00089.jpeg" alt="Drawing">
-        <div class="grid-caption"><h3>Drawings</h3></div>
-      </a>
-
-      <a href="projekte/denim-dress.html" class="grid-item grid-item--wide" style="aspect-ratio: 4/3;">
-        <img src="img/denim-dress-00020.jpeg" alt="Denim Dress">
-        <div class="grid-caption"><h3>Denim Dress</h3></div>
-      </a>
-
-      <a href="projekte/alchimia-jacket.html" class="grid-item">
-        <img src="img/IMG_2896.JPG" alt="Shell Jacket" style="object-position: center 60%;">
-        <div class="grid-caption"><h3>Shell Jacket</h3></div>
-      </a>
-
-      <a href="projekte/upcycling.html" class="grid-item">
-        <img src="img/IMG_2910.JPG" alt="Upcycling">
-        <div class="grid-caption"><h3>Upcycling</h3></div>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- VIDEO -->
-  <section id="video">
-    <div class="section-header">
-      <h2>Visuals</h2>
-      <span>Motion &amp; Process</span>
-    </div>
-
-    <div class="video-grid">
-
-      <div class="video-item">
-        <video src="video/video-output-CA9992EC-20E1-412B-8A66-E7AABAFC7DB4-1.mov" autoplay muted loop playsinline></video>
+    <!-- REIHE 1: KOLLEKTIONEN -->
+    <section class="row" id="work">
+      <div class="row-head">
+        <span class="num">(01)</span>
+        <h2 data-de="Kollektionen">Collections</h2>
+        <span class="meta">2025 – 2026</span>
       </div>
-
-      <div class="video-item">
-        <video src="video/video-output-33F94B60-7CBC-4930-A565-A54466CF8D9F-1.mp4" autoplay muted loop playsinline></video>
+      <div class="track-wrap">
+        <div class="track">
+          <a href="projekte/armor-within-look-1.html" class="slide">
+            <img src="img/web/thumb/image16.jpg" decoding="async" alt="Armor Within Look 1">
+            <div class="slide-caption"><h3>Armor Within Look 1</h3></div>
+          </a>
+          <a href="projekte/armor-within-look-2.html" class="slide">
+            <img src="img/web/thumb/image11.jpg" decoding="async" alt="Armor Within Look 2" style="object-position: center bottom;">
+            <div class="slide-caption"><h3>Armor Within Look 2</h3></div>
+          </a>
+          <a href="projekte/armor-within-look-3.html" class="slide">
+            <img src="img/web/thumb/image03.jpg" decoding="async" alt="Armor Within Look 3">
+            <div class="slide-caption"><h3>Armor Within Look 3</h3></div>
+          </a>
+          <a href="projekte/leather-utility-belt.html" class="slide">
+            <img src="img/web/thumb/Facetune_18-08-2026-01-13-02.jpg" decoding="async" alt="Leather Utility Belt" style="object-position: 100% center;">
+            <div class="slide-caption"><h3>Leather Utility Belt</h3></div>
+          </a>
+          <a href="projekte/morphoskin.html" class="slide">
+            <img src="img/web/thumb/morphoskin-00025.jpg" decoding="async" alt="Morphoskin">
+            <div class="slide-caption"><h3>Morphoskin</h3></div>
+          </a>
+          <a href="projekte/denim.html" class="slide">
+            <img src="img/web/thumb/denim-00006.jpg" decoding="async" alt="Denim">
+            <div class="slide-caption"><h3>Denim</h3></div>
+          </a>
+          <a href="projekte/corset.html" class="slide">
+            <img src="img/web/thumb/corset-00028.jpg" decoding="async" alt="Corset">
+            <div class="slide-caption"><h3>Corset</h3></div>
+          </a>
+          <a href="projekte/red-leather-two-piece.html" class="slide">
+            <img src="img/web/thumb/red-leather-two-piece-00066.jpg" decoding="async" alt="Leather Two Piece" style="object-position: center top;">
+            <div class="slide-caption"><h3>Leather Two Piece</h3></div>
+          </a>
+          <a href="projekte/alchimia-jacket.html" class="slide">
+            <img src="img/web/thumb/IMG_2896.jpg" decoding="async" alt="Shell Jacket" style="object-position: center 60%;">
+            <div class="slide-caption"><h3>Shell Jacket</h3></div>
+          </a>
+        </div>
+        <button class="arrow arrow--prev" type="button" aria-label="Previous" data-de-aria="Zurück">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="20" y1="12" x2="4" y2="12"/><polyline points="10,6 4,12 10,18"/></svg>
+        </button>
+        <button class="arrow arrow--next" type="button" aria-label="Next" data-de-aria="Weiter">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14,6 20,12 14,18"/></svg>
+        </button>
       </div>
+    </section>
 
-      <div class="video-item">
-        <video src="video/video-output-29D8CFC2-F76A-4699-9075-52A099D44D9E-3.mov" autoplay muted loop playsinline></video>
+    <!-- REIHE 2: VISUALS -->
+    <section class="row" id="video">
+      <div class="row-head">
+        <span class="num">(02)</span>
+        <h2>Visuals</h2>
+        <span class="meta" data-de="Bewegung &amp;amp; Prozess">Motion &amp; Process</span>
       </div>
-
-      <div class="video-item">
-        <video src="video/IMG_9592.mov" autoplay muted loop playsinline></video>
+      <div class="track-wrap">
+        <div class="track">
+          <a href="projekte/morphoskin.html" class="slide slide--video">
+            <video src="video/web/video-output-CA9992EC-20E1-412B-8A66-E7AABAFC7DB4-1.mp4" poster="video/web/video-output-CA9992EC-20E1-412B-8A66-E7AABAFC7DB4-1.jpg" style="object-position: 50% 10%;" muted loop playsinline preload="none"></video>
+            <div class="slide-caption"><h3>Morphoskin</h3></div>
+          </a>
+          <a href="projekte/corset.html" class="slide slide--video">
+            <video src="video/web/video-output-33F94B60-7CBC-4930-A565-A54466CF8D9F-1.mp4" poster="video/web/video-output-33F94B60-7CBC-4930-A565-A54466CF8D9F-1.jpg" style="object-position: 50% 30%;" muted loop playsinline preload="none"></video>
+            <div class="slide-caption"><h3>Corset</h3></div>
+          </a>
+          <a href="projekte/denim.html" class="slide slide--video">
+            <video src="video/web/video-output-29D8CFC2-F76A-4699-9075-52A099D44D9E-3.mp4" poster="video/web/video-output-29D8CFC2-F76A-4699-9075-52A099D44D9E-3.jpg" style="object-position: 50% 20%;" muted loop playsinline preload="none"></video>
+            <div class="slide-caption"><h3>Denim</h3></div>
+          </a>
+          <a href="projekte/armor-within-look-1.html" class="slide slide--video">
+            <video src="video/web/IMG_9592.mp4" poster="video/web/IMG_9592.jpg" muted loop playsinline preload="none"></video>
+            <div class="slide-caption"><h3>Armor Within Look 1</h3></div>
+          </a>
+          <a href="projekte/morphoskin.html" class="slide slide--video">
+            <video src="video/web/video-output-6FA81461-A45D-4710-B276-1E6D2EAB4A80-1.mp4" poster="video/web/video-output-6FA81461-A45D-4710-B276-1E6D2EAB4A80-1.jpg" muted loop playsinline preload="none"></video>
+            <div class="slide-caption"><h3>Morphoskin</h3></div>
+          </a>
+          <a href="projekte/armor-within-look-3.html" class="slide slide--video">
+            <video src="video/web/IMG_9828.mp4" poster="video/web/IMG_9828.jpg" muted loop playsinline preload="none"></video>
+            <div class="slide-caption"><h3>Armor Within Look 3</h3></div>
+          </a>
+          <a href="projekte/leather-utility-belt.html" class="slide slide--video">
+            <video src="video/web/video-output-72EC3328-2E8A-4A96-8B30-196BBB1CD1AE-1.mp4" poster="video/web/video-output-72EC3328-2E8A-4A96-8B30-196BBB1CD1AE-1.jpg" muted loop playsinline preload="none"></video>
+            <div class="slide-caption"><h3>Leather Utility Belt</h3></div>
+          </a>
+          <a href="projekte/armor-within-look-2.html" class="slide slide--video">
+            <video src="video/web/video-output-135F6D27-F909-40A6-B52D-B2CA53D53246-2.mp4" poster="video/web/video-output-135F6D27-F909-40A6-B52D-B2CA53D53246-2.jpg" style="object-position: 50% 20%;" muted loop playsinline preload="none"></video>
+            <div class="slide-caption"><h3>Armor Within Look 2</h3></div>
+          </a>
+        </div>
+        <button class="arrow arrow--prev" type="button" aria-label="Previous" data-de-aria="Zurück">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="20" y1="12" x2="4" y2="12"/><polyline points="10,6 4,12 10,18"/></svg>
+        </button>
+        <button class="arrow arrow--next" type="button" aria-label="Next" data-de-aria="Weiter">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="14,6 20,12 14,18"/></svg>
+        </button>
       </div>
+    </section>
 
-      <div class="video-item">
-        <video src="video/video-output-6FA81461-A45D-4710-B276-1E6D2EAB4A80-1.mov" autoplay muted loop playsinline></video>
-      </div>
+    <h1 class="stage-intro" data-de="Modedesign-Portfolio &lt;span&gt;— von Paula Werquet-Britzen&lt;/span&gt;">Fashion Design Portfolio <span>— by Paula Werquet-Britzen</span></h1>
+  </main>
 
-      <div class="video-item">
-        <video src="video/IMG_9828.mp4" autoplay muted loop playsinline></video>
-      </div>
+  <script>
+    // Endlos-Slider: die Kacheln werden links und rechts einmal kopiert.
+    // Läuft man in eine Kopie, springt die Reihe unsichtbar zurück in die Mitte,
+    // dadurch geht es in beide Richtungen immer wieder von vorne los.
+    document.querySelectorAll('.track-wrap').forEach(function (wrap) {
+      var track = wrap.querySelector('.track');
+      var prev = wrap.querySelector('.arrow--prev');
+      var next = wrap.querySelector('.arrow--next');
+      var originals = Array.prototype.slice.call(track.querySelectorAll('.slide'));
+      var n = originals.length;
 
-    </div>
-  </section>
+      function makeClone(el) {
+        var c = el.cloneNode(true);
+        c.setAttribute('aria-hidden', 'true');
+        c.classList.add('slide--clone');
+        if (c.tagName === 'A') c.setAttribute('tabindex', '-1');
+        return c;
+      }
+      originals.forEach(function (el) { track.appendChild(makeClone(el)); });
+      originals.slice().reverse().forEach(function (el) { track.insertBefore(makeClone(el), track.firstChild); });
+
+      function step() {
+        var s = track.querySelectorAll('.slide');
+        return s[1].offsetLeft - s[0].offsetLeft;
+      }
+      function setWidth() { return step() * n; }
+
+      var slides = Array.prototype.slice.call(track.querySelectorAll('.slide'));
+
+      // Kachel, die der Mitte am nächsten ist, bekommt .is-center
+      function markCenter() {
+        var r = track.getBoundingClientRect(), mid = r.left + r.width / 2;
+        var best = null, bd = Infinity;
+        slides.forEach(function (el) {
+          var q = el.getBoundingClientRect();
+          var d = Math.abs(q.left + q.width / 2 - mid);
+          if (d < bd) { bd = d; best = el; }
+        });
+        slides.forEach(function (el) { el.classList.toggle('is-center', el === best); });
+      }
+
+      function jump(x) {
+        track.classList.add('no-anim');
+        track.style.scrollBehavior = 'auto';
+        track.scrollLeft = x;
+        track.style.scrollBehavior = '';
+        markCenter();
+        void track.offsetWidth;
+        track.classList.remove('no-anim');
+      }
+      function normalize() {
+        var w = setWidth(), x = track.scrollLeft;
+        if (x < w * 0.5) jump(x + w);
+        else if (x > w * 1.5) jump(x - w);
+      }
+
+      function advance(dir) { normalize(); track.scrollBy({ left: dir * step() }); }
+
+      // Läuft von alleine weiter (Fotos alle 4 s, Videos alle 6 s).
+      // Pause, solange die Maus über der Reihe ist, beim Wischen und wenn der Tab im Hintergrund ist.
+      var interval = wrap.closest('#video') ? 6000 : 4000;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var timer = null, paused = false, touchT;
+      function startAuto() {
+        clearInterval(timer);
+        if (reduce) return;
+        timer = setInterval(function () { if (!paused && !document.hidden) advance(1); }, interval);
+      }
+      wrap.addEventListener('mouseenter', function () { paused = true; });
+      wrap.addEventListener('mouseleave', function () { paused = false; });
+      wrap.addEventListener('focusin', function () { paused = true; });
+      wrap.addEventListener('focusout', function () { paused = false; });
+      track.addEventListener('touchstart', function () { paused = true; clearTimeout(touchT); }, { passive: true });
+      track.addEventListener('touchend', function () { touchT = setTimeout(function () { paused = false; }, 4000); });
+
+      next.addEventListener('click', function () { advance(1); startAuto(); });
+      prev.addEventListener('click', function () { advance(-1); startAuto(); });
+
+      var t, raf;
+      track.addEventListener('scroll', function () {
+        if (!raf) raf = requestAnimationFrame(function () { raf = null; markCenter(); });
+        clearTimeout(t); t = setTimeout(normalize, 150);
+      });
+
+      // Start: auf dem Original-Satz
+      jump(setWidth());
+      startAuto();
+      window.addEventListener('load', function () { jump(setWidth()); });
+      window.addEventListener('resize', function () { jump(setWidth()); });
+    });
+  </script>
 
   <!-- ABOUT -->
   <section id="about" style="grid-template-columns: 1fr;">
     <div class="about-text">
-      <h2>About</h2>
-      <p>Fashion design student based in Berlin with a focus on garment construction, pattern making, and contemporary design.<br>Practical experience through atelier work, internship, and independent creative projects.</p>
+      <h2 data-de="Über mich">About</h2>
+      <p data-de="Modedesignerin in Berlin mit Schwerpunkt auf Bekleidungskonstruktion, Schnitttechnik und zeitgenössischem Design.&lt;br&gt;Praktische Erfahrung durch Atelierarbeit, Praktikum und eigene kreative Projekte.">Fashion designer based in Berlin with a focus on garment construction, pattern making, and contemporary design.<br>Practical experience through atelier work, internship, and independent creative projects.</p>
       <hr class="about-rule">
-      <h3 class="about-section">Education</h3>
+      <h3 class="about-section" data-de="Ausbildung">Education</h3>
       <ul class="about-list">
-        <li>State-certified Fashion Designer — Modeschule Berlin (2023–2026)</li>
+        <li data-de="Staatlich geprüfte Modedesignerin — Modeschule Berlin (2023–2026)">State-certified Fashion Designer — Modeschule Berlin (2023–2026)</li>
       </ul>
       <hr class="about-rule">
-      <h3 class="about-section">Experience</h3>
+      <h3 class="about-section" data-de="Erfahrung">Experience</h3>
       <ul class="about-list">
-        <li>Internship at Slacks Fashion, Berlin</li>
-        <li>Experience in garment construction, corsetry, alterations and atelier support</li>
+        <li data-de="Praktikum bei Slacks Fashion, Berlin">Internship at Slacks Fashion, Berlin</li>
+        <li data-de="Praktikum bei Sakina M/SA, Paris">Internship at Sakina M/SA, Paris</li>
       </ul>
       <hr class="about-rule">
-      <h3 class="about-section">Skills</h3>
+      <h3 class="about-section" data-de="Kenntnisse">Skills</h3>
       <ul class="about-list">
-        <li>Garment Construction</li>
-        <li>Pattern Making</li>
+        <li data-de="Bekleidungskonstruktion">Garment Construction</li>
+        <li data-de="Schnitterstellung">Pattern Making</li>
         <li>Adobe Illustrator, InDesign &amp; Photoshop</li>
         <li>Procreate</li>
+        <li data-de="Erfahrung in Bekleidungskonstruktion, Korsettherstellung, Änderungsschneiderei und Atelierassistenz">Experience in garment construction, corsetry, alterations and atelier support</li>
       </ul>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
-    <h2>Contact</h2>
+    <h2 data-de="Kontakt">Contact</h2>
     <div style="display:flex; flex-direction:column; align-items:center; gap:0.9rem;">
+      <a href="mailto:contact.werquet@gmail.com" class="contact-link" style="display:inline-flex; align-items:center; gap:0.5rem; border-bottom:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        contact.werquet@gmail.com
+      </a>
       <a href="https://instagram.com/werquet.atelier" target="_blank" rel="noopener" class="contact-link" style="display:inline-flex; align-items:center; gap:0.5rem; border-bottom:none;">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         @werquet.atelier
@@ -618,40 +868,51 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
         @paulaa.wb
       </a>
-      <a href="mailto:paula.wb@aol.com" class="contact-link" style="display:inline-flex; align-items:center; gap:0.5rem; border-bottom:none;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-        paula.wb@aol.com
-      </a>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer>
-    <span>© 2026 Paula Werquet</span>
-  </footer>
 
   <script>
-    const videos = document.querySelectorAll('video');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const v = entry.target;
-        if (entry.isIntersecting) {
-          v.play().catch(() => {});
-        } else {
-          v.pause();
+    // Visuals: nur das Video in der Mitte der Reihe spielt, alle anderen pausieren
+    (function () {
+      var track = document.querySelector('#video .track');
+      if (!track) return;
+      var videos = Array.prototype.slice.call(track.querySelectorAll('video'));
+      var rowVisible = true;
+      var current = null;
+      videos.forEach(function (v) { v.muted = true; v.playsInline = true; });
+
+      function update() {
+        var r = track.getBoundingClientRect();
+        var mid = r.left + r.width / 2;
+        var best = null, bestDist = Infinity;
+        videos.forEach(function (v) {
+          var vr = v.getBoundingClientRect();
+          var d = Math.abs(vr.left + vr.width / 2 - mid);
+          if (d < bestDist) { bestDist = d; best = v; }
+        });
+        if (current && best && current !== best && current.currentSrc === best.currentSrc) {
+          try { best.currentTime = current.currentTime; } catch (e) {}
         }
-      });
-    }, { threshold: 0.1 });
-    videos.forEach(v => {
-      v.muted = true;
-      v.playsInline = true;
-      observer.observe(v);
-    });
-    document.addEventListener('touchstart', function unlock() {
-      videos.forEach(v => { v.play().catch(() => {}); setTimeout(() => v.pause(), 10); });
-      document.removeEventListener('touchstart', unlock);
-    }, { once: true });
+        videos.forEach(function (v) {
+          if (v === best && rowVisible) { v.play().catch(function () {}); }
+          else { v.pause(); }
+        });
+        current = best;
+      }
+
+      var t;
+      track.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(update, 120); });
+      window.addEventListener('resize', update);
+      new IntersectionObserver(function (entries) {
+        rowVisible = entries[0].isIntersecting;
+        update();
+      }, { threshold: 0.2 }).observe(track);
+      update();
+    })();
   </script>
 
+  <script src="lang.js"></script>
 </body>
 </html>
