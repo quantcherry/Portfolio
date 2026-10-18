@@ -65,6 +65,16 @@
       .project-grid > .project-grid-item:last-child:nth-child(3n+2) { grid-column: 4 / span 2; }
       .project-grid > .pg-center { grid-column: 3 / span 2; }
     }
+    /* Menü bei mittleren Bildschirmbreiten enger, damit es nicht ins Logo läuft */
+    @media (min-width: 961px) and (max-width: 1240px) {
+      .nav-links { gap: 1.1rem; }
+      .nav-links a, .lang-switch { font-size: 0.72rem; letter-spacing: 0.08em; }
+    }
+    /* Beschreibungszeilen und "Created in" direkt untereinander, ohne Abstand */
+    .project-desc:has(+ .project-desc) { padding-bottom: 0 !important; margin-bottom: 0; }
+    .project-desc.created { padding-top: 0; margin-top: 0; }
+    /* Abstand zwischen Text und Fotos (bei allen Alben gleich, enger) */
+    .project-desc:last-of-type { padding-bottom: 1rem !important; }
   </style>
 </head>
 <body>
@@ -74,7 +84,8 @@
     <ul class="nav-links" id="nav-links">
       <li class="lang-switch"><button type="button" data-lang="de">DE</button><span aria-hidden="true">/</span><button type="button" data-lang="en">EN</button></li>
       <li><a href="../index.html#work" data-de="Arbeiten">Work</a></li>
-      <li><a href="videos.html">Visuals</a></li>
+      <li><a href="../index.html#video">Visuals</a></li>
+      <li><a href="../index.html#service">Service</a></li>
       <li><a href="../index.html#about" data-de="Über mich">About</a></li>
       <li><a href="../index.html#contact" data-de="Kontakt">Contact</a></li>
     </ul>
@@ -85,6 +96,7 @@
     </button>
   </nav>
   <div class="project-header"><h1>Armor Within Look 2</h1></div>
+  <p class="project-desc created" data-de="Entstanden im Juni 2026.">Created in June 2026.</p>
   <div class="project-grid">
     <div class="project-grid-item" style="aspect-ratio: 2/3;"><img src="../img/web/image11.jpg" decoding="async" alt="Armor Within Look 2"></div>
     <div class="project-grid-item" style="aspect-ratio: 2/3;"><img src="../img/web/image14.jpg" decoding="async" alt="Armor Within Look 2"></div>
@@ -95,7 +107,7 @@
     <div class="project-grid-item" style="aspect-ratio: 2/3;"><img src="../img/web/image15.jpg" loading="lazy" decoding="async" alt="Armor Within Look 2"></div>
     <div class="project-grid-item" style="aspect-ratio: 2/3;"><video src="../video/web/video-output-135F6D27-F909-40A6-B52D-B2CA53D53246-2.mp4" poster="../video/web/video-output-135F6D27-F909-40A6-B52D-B2CA53D53246-2.jpg" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block;"></video></div>
   </div>
-  <button onclick="history.back()" class="back-link" data-de="← Zurück zur Übersicht">← Back to overview</button>
+  <button data-back="../index.html#work" class="back-link" data-de="← Zurück zur Übersicht">← Back to overview</button>
   <script>
     document.querySelectorAll('#nav-links a').forEach(function(link) {
       link.addEventListener('click', function() {

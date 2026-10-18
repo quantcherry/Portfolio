@@ -66,6 +66,16 @@
       .project-grid > .pg-center { grid-column: 3 / span 2; }
       .project-grid > .pg-half { grid-column: span 3; } /* zwei Querformate nebeneinander */
     }
+    /* Menü bei mittleren Bildschirmbreiten enger, damit es nicht ins Logo läuft */
+    @media (min-width: 961px) and (max-width: 1240px) {
+      .nav-links { gap: 1.1rem; }
+      .nav-links a, .lang-switch { font-size: 0.72rem; letter-spacing: 0.08em; }
+    }
+    /* Beschreibungszeilen und "Created in" direkt untereinander, ohne Abstand */
+    .project-desc:has(+ .project-desc) { padding-bottom: 0 !important; margin-bottom: 0; }
+    .project-desc.created { padding-top: 0; margin-top: 0; }
+    /* Abstand zwischen Text und Fotos (bei allen Alben gleich, enger) */
+    .project-desc:last-of-type { padding-bottom: 1rem !important; }
   </style>
 </head>
 <body>
@@ -75,7 +85,8 @@
     <ul class="nav-links" id="nav-links">
       <li class="lang-switch"><button type="button" data-lang="de">DE</button><span aria-hidden="true">/</span><button type="button" data-lang="en">EN</button></li>
       <li><a href="../index.html#work" data-de="Arbeiten">Work</a></li>
-      <li><a href="videos.html">Visuals</a></li>
+      <li><a href="../index.html#video">Visuals</a></li>
+      <li><a href="../index.html#service">Service</a></li>
       <li><a href="../index.html#about" data-de="Über mich">About</a></li>
       <li><a href="../index.html#contact" data-de="Kontakt">Contact</a></li>
     </ul>
@@ -86,6 +97,7 @@
     </button>
   </nav>
   <div class="project-header"><h1>Leather Utility Belt</h1></div>
+  <p class="project-desc created" data-de="Entstanden im August 2026.">Created in August 2026.</p>
   <div class="project-grid">
     <div class="project-grid-item"><img src="../img/web/Facetune_18-08-2026-01-17-46.jpg" decoding="async" alt="Leather Utility Belt"></div>
     <div class="project-grid-item"><img src="../img/web/Facetune_17-08-2026-19-29-53.jpg" decoding="async" alt="Leather Utility Belt"></div>
@@ -94,7 +106,7 @@
     <div class="project-grid-item pg-half" style="aspect-ratio: 4/3;"><img src="../img/web/Facetune_18-08-2026-01-13-02.jpg" loading="lazy" decoding="async" alt="Leather Utility Belt"></div>
     <div class="project-grid-item pg-center"><video src="../video/web/video-output-72EC3328-2E8A-4A96-8B30-196BBB1CD1AE-1.mp4" poster="../video/web/video-output-72EC3328-2E8A-4A96-8B30-196BBB1CD1AE-1.jpg" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video></div>
   </div>
-  <button onclick="history.back()" class="back-link" data-de="← Zurück zur Übersicht">← Back to overview</button>
+  <button data-back="../index.html#work" class="back-link" data-de="← Zurück zur Übersicht">← Back to overview</button>
   <script>
     document.querySelectorAll('#nav-links a').forEach(function(link) {
       link.addEventListener('click', function() {

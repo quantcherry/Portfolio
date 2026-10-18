@@ -331,7 +331,7 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: opacity 1s ease, visibility 1s ease;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
     }
     .intro.is-hidden { opacity: 0; visibility: hidden; }
 
@@ -345,7 +345,7 @@
       aspect-ratio: 1830 / 1095;
       overflow: hidden;
       opacity: 0;
-      animation: introIn 1.4s ease 0.1s forwards;
+      animation: introIn 0.9s ease 0.05s forwards;
     }
     .intro-logo img {
       position: absolute;
@@ -364,7 +364,7 @@
       text-align: center;
       padding: 0 1.5rem;
       opacity: 0;
-      animation: introIn 1.4s ease 0.8s forwards;
+      animation: introIn 0.9s ease 0.35s forwards;
     }
     .intro-tag span { white-space: nowrap; }
     @media (max-width: 600px) {
@@ -377,6 +377,39 @@
     @keyframes introIn { from { opacity: 0; } to { opacity: 1; } }
     @media (prefers-reduced-motion: reduce) {
       .intro-logo, .intro-tag { animation: none; opacity: 1; }
+    }
+
+    /* ── SERVICE (auf der Startseite, zwischen Visuals und About) ── */
+    #service {
+      padding: calc(var(--gap) * 1.5) 1.5rem var(--gap) 1.5rem;
+      text-align: center;
+      scroll-margin-top: 6rem;
+    }
+    #service h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+    }
+    .svc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; width: 100%; max-width: 600px; margin: 2.5rem auto 0; }
+    .svc-c {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(26,26,24,0.35);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 0.6rem;
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.4;
+      color: var(--ink);
+      hyphens: manual;
+    }
+    .svc-note { color: var(--mid); font-size: 0.9rem; line-height: 1.8; margin-top: 2.5rem; }
+    .svc-mail { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1rem; text-decoration: none; color: var(--ink); font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+    .svc-mail:hover { color: var(--mid); }
+    .svc-mail svg { width: 18px; height: 18px; }
+    @media (max-width: 600px) {
+      .svc { gap: 0.5rem; }
+      .svc-c { font-size: 0.5rem; letter-spacing: 0.04em; padding: 0.3rem; }
     }
 
     /* ── ABOUT ── */
@@ -509,6 +542,17 @@
       .row .track { padding: 0; }
       .row .arrow { right: 0.5rem; }
       .row .arrow--prev { right: auto; left: 0.5rem; }
+      /* Pfeil-Kreise so klein wie möglich */
+      .row .arrow { width: 1.6rem; height: 1.6rem; }
+      .row .arrow svg { width: 0.8rem; height: 0.8rem; }
+      /* Zeile unter den Visuals: Name in eigener Zeile, ohne Strich */
+      .stage-intro > span { display: block; margin-top: 0.4rem; }
+      .stage-intro .sep { display: none; }
+      /* Education: "at Modeschule Berlin" in eigener Zeile */
+      .edu-at { display: block; }
+      /* Kollektionsnamen in den Kacheln kleiner, damit sie in höchstens zwei Zeilen passen */
+      .slide-caption { padding: 0.7rem; }
+      .slide-caption h3 { font-size: 0.95rem; gap: 0.35rem; }
       #about { grid-template-columns: 1fr; }
       .about-img { order: -1; aspect-ratio: 4/3; }
 
@@ -554,6 +598,11 @@
     .lang-switch { display: flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--mid); }
     .lang-switch button { background: none; border: none; padding: 0; font: inherit; letter-spacing: inherit; text-transform: uppercase; color: var(--mid); cursor: pointer; transition: color 0.2s; }
     .lang-switch button:hover, .lang-switch button.active { color: var(--ink); }
+    /* Menü bei mittleren Bildschirmbreiten enger, damit es nicht ins Logo läuft */
+    @media (min-width: 961px) and (max-width: 1240px) {
+      .nav-links { gap: 1.1rem; }
+      .nav-links a, .lang-switch { font-size: 0.72rem; letter-spacing: 0.08em; }
+    }
   </style>
 </head>
 <body>
@@ -564,7 +613,7 @@
     <div class="intro-tag" data-de="&lt;span&gt;Design-Portfolio&lt;/span&gt;&lt;span class=&quot;sep&quot;&gt; — &lt;/span&gt;&lt;span&gt;Paula Werquet-Britzen&lt;/span&gt;"><span>Design Portfolio</span><span class="sep"> — </span><span>Paula Werquet-Britzen</span></div>
   </div>
   <script>
-    // Intro 6 Sekunden zeigen, dann ausblenden. Klick oder Enter überspringt.
+    // Intro 2,5 Sekunden zeigen, dann ausblenden. Klick oder Enter überspringt.
     // Nicht erneut zeigen, wenn man im selben Tab zurückkommt oder über einen Menülink (#work …) kommt.
     (function () {
       var el = document.getElementById('intro');
@@ -572,7 +621,7 @@
       try { seen = sessionStorage.getItem('werquet-intro') === '1'; } catch (e) {}
       if (seen || location.hash) { el.parentNode.removeChild(el); return; }
       document.documentElement.style.overflow = 'hidden';
-      var timer = setTimeout(done, 6000);
+      var timer = setTimeout(done, 2500);
       function done() {
         clearTimeout(timer);
         if (!el.parentNode || el.classList.contains('is-hidden')) return;
@@ -594,6 +643,7 @@
       <li class="lang-switch"><button type="button" data-lang="de">DE</button><span aria-hidden="true">/</span><button type="button" data-lang="en">EN</button></li>
       <li><a href="#work" data-de="Arbeiten">Work</a></li>
       <li><a href="#video">Visuals</a></li>
+      <li><a href="#service">Service</a></li>
       <li><a href="#about" data-de="Über mich">About</a></li>
       <li><a href="#contact" data-de="Kontakt">Contact</a></li>
     </ul>
@@ -618,7 +668,7 @@
       <a href="mailto:contact.werquet@gmail.com?subject=Custom%20Order%20%2F%20Inquiry" class="cta-icon" aria-label="E-Mail">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
       </a>
-      <a href="projekte/custom-orders.html" class="contact-link">
+      <a href="mailto:contact.werquet@gmail.com?subject=Custom%20Order%20%2F%20Inquiry" class="contact-link">
         <span data-de="Maßanfertigungen &amp;amp; Anfragen">Custom Orders &amp; Inquiries</span>
       </a>
     </div>
@@ -729,7 +779,7 @@
       </div>
     </section>
 
-    <h1 class="stage-intro" data-de="Modedesign-Portfolio &lt;span&gt;— von Paula Werquet-Britzen&lt;/span&gt;">Fashion Design Portfolio <span>— by Paula Werquet-Britzen</span></h1>
+    <h1 class="stage-intro" data-de="Modedesign-Portfolio &lt;span&gt;&lt;span class=&quot;sep&quot;&gt;— &lt;/span&gt;von Paula Werquet-Britzen&lt;/span&gt;">Fashion Design Portfolio <span><span class="sep">— </span>by Paula Werquet-Britzen</span></h1>
   </main>
 
   <script>
@@ -824,15 +874,35 @@
     });
   </script>
 
+  <!-- SERVICE -->
+  <section id="service">
+    <h2>Service</h2>
+    <div class="svc" aria-label="Services">
+      <div class="svc-c"><span data-de="Einzelstücke">Custom pieces</span></div>
+      <div class="svc-c"><span data-de="Änderungen">Alterations</span></div>
+      <div class="svc-c"><span data-de="Schnitt&amp;shy;erstellung">Pattern making</span></div>
+      <div class="svc-c"><span data-de="Prototypen">Prototyping</span></div>
+      <div class="svc-c"><span data-de="Designer-Support">Designer support</span></div>
+      <div class="svc-c"><span data-de="Klein&amp;shy;produktion">Small production</span></div>
+      <div class="svc-c"><span data-de="Koope&amp;shy;rationen">Collaborations</span></div>
+      <div class="svc-c"><span data-de="Leihgaben">Loans</span></div>
+    </div>
+    <p class="svc-note" data-de="Für unverbindliche Anfragen schick mir einfach eine E-Mail.">For non-binding inquiries, simply send me an email.</p>
+    <a href="mailto:contact.werquet@gmail.com?subject=Custom%20Order%20%2F%20Inquiry" class="svc-mail">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+      <span>contact.werquet@gmail.com</span>
+    </a>
+  </section>
+
   <!-- ABOUT -->
   <section id="about" style="grid-template-columns: 1fr;">
     <div class="about-text">
       <h2 data-de="Über mich">About</h2>
-      <p data-de="Modedesignerin in Berlin mit Schwerpunkt auf Bekleidungskonstruktion, Schnitttechnik und zeitgenössischem Design.&lt;br&gt;Praktische Erfahrung durch Atelierarbeit, Praktikum und eigene kreative Projekte.">Fashion designer based in Berlin with a focus on garment construction, pattern making, and contemporary design.<br>Practical experience through atelier work, internship, and independent creative projects.</p>
+      <p data-de="Modedesignerin in Berlin.&lt;br&gt;Praktische Erfahrung durch Atelierarbeit, Praktikum und eigene kreative Projekte.">Fashion designer based in Berlin.<br>Practical experience through atelier work, internship and independent creative projects.</p>
       <hr class="about-rule">
       <h3 class="about-section" data-de="Ausbildung">Education</h3>
       <ul class="about-list">
-        <li data-de="Staatlich geprüfte Modedesignerin — Modeschule Berlin (2023–2026)">State-certified Fashion Designer — Modeschule Berlin (2023–2026)</li>
+        <li data-de="Staatlich geprüfte Modedesignerin &lt;span class=&quot;edu-at&quot;&gt;(Modeschule Berlin 2023–2026)&lt;/span&gt;">State-certified Fashion Designer <span class="edu-at">(Modeschule Berlin 2023–2026)</span></li>
       </ul>
       <hr class="about-rule">
       <h3 class="about-section" data-de="Erfahrung">Experience</h3>
@@ -845,9 +915,9 @@
       <ul class="about-list">
         <li data-de="Bekleidungskonstruktion">Garment Construction</li>
         <li data-de="Schnitterstellung">Pattern Making</li>
+        <li data-de="Korsettherstellung">Corsetry</li>
         <li>Adobe Illustrator, InDesign &amp; Photoshop</li>
         <li>Procreate</li>
-        <li data-de="Erfahrung in Bekleidungskonstruktion, Korsettherstellung, Änderungsschneiderei und Atelierassistenz">Experience in garment construction, corsetry, alterations and atelier support</li>
       </ul>
     </div>
   </section>
@@ -874,7 +944,7 @@
   <!-- FOOTER -->
 
   <script>
-    // Visuals: nur das Video in der Mitte der Reihe spielt, alle anderen pausieren
+    // Visuals: Desktop – nur das Video in der Mitte spielt; Handy – beide sichtbaren Videos spielen
     (function () {
       var track = document.querySelector('#video .track');
       if (!track) return;
@@ -883,8 +953,21 @@
       var current = null;
       videos.forEach(function (v) { v.muted = true; v.playsInline = true; });
 
+      var mobile = window.matchMedia('(max-width: 960px)');
+
       function update() {
         var r = track.getBoundingClientRect();
+        // Handy: alle Videos abspielen, die zu mindestens der Hälfte sichtbar sind
+        if (mobile.matches) {
+          videos.forEach(function (v) {
+            var vr = v.getBoundingClientRect();
+            var vis = Math.min(vr.right, r.right) - Math.max(vr.left, r.left);
+            if (rowVisible && vis > vr.width * 0.5) { v.play().catch(function () {}); }
+            else { v.pause(); }
+          });
+          current = null;
+          return;
+        }
         var mid = r.left + r.width / 2;
         var best = null, bestDist = Infinity;
         videos.forEach(function (v) {

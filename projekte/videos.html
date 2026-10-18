@@ -51,6 +51,13 @@
     .lang-switch { display: flex; align-items: center; gap: 0.35rem; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--mid); }
     .lang-switch button { background: none; border: none; padding: 0; font: inherit; letter-spacing: inherit; text-transform: uppercase; color: var(--mid); cursor: pointer; transition: color 0.2s; }
     .lang-switch button:hover, .lang-switch button.active { color: var(--ink); }
+    /* Menü bei mittleren Bildschirmbreiten enger, damit es nicht ins Logo läuft */
+    @media (min-width: 961px) and (max-width: 1240px) {
+      .nav-links { gap: 1.1rem; }
+      .nav-links a, .lang-switch { font-size: 0.72rem; letter-spacing: 0.08em; }
+    }
+    /* Abstand zwischen Text und Fotos (bei allen Alben gleich, enger) */
+    .project-desc:last-of-type { padding-bottom: 1rem !important; }
   </style>
 </head>
 <body>
@@ -60,7 +67,8 @@
     <ul class="nav-links" id="nav-links">
       <li class="lang-switch"><button type="button" data-lang="de">DE</button><span aria-hidden="true">/</span><button type="button" data-lang="en">EN</button></li>
       <li><a href="../index.html#work" data-de="Arbeiten">Work</a></li>
-      <li><a href="videos.html">Visuals</a></li>
+      <li><a href="../index.html#video">Visuals</a></li>
+      <li><a href="../index.html#service">Service</a></li>
       <li><a href="../index.html#about" data-de="Über mich">About</a></li>
       <li><a href="../index.html#contact" data-de="Kontakt">Contact</a></li>
     </ul>
