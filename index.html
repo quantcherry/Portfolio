@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio — Paula Werquet</title>
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="48x48" href="img/icons/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="img/icons/favicon-96.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="img/icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/icons/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
@@ -321,64 +326,6 @@
     .row .arrow { right: -4rem; }
     .row .arrow--prev { right: auto; left: -4rem; }
 
-    /* ── INTRO: Startbildschirm, 6 Sekunden, nur beim ersten Aufruf pro Browser-Tab ── */
-    .intro {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
-    }
-    .intro.is-hidden { opacity: 0; visibility: hidden; }
-
-    /* Logo und Schrift mittig untereinander */
-    .intro { flex-direction: column; gap: 2.5rem; }
-
-    /* Ausschnitt nur um die Kugeln (das Logo-Bild hat viel weißen Rand) */
-    .intro-logo {
-      position: relative;
-      width: min(40vw, 560px);
-      aspect-ratio: 1830 / 1095;
-      overflow: hidden;
-      opacity: 0;
-      animation: introIn 0.9s ease 0.05s forwards;
-    }
-    .intro-logo img {
-      position: absolute;
-      width: 180.33%;
-      height: auto;
-      left: -40.16%;
-      top: -69.41%;
-    }
-
-    .intro-tag {
-      font-size: clamp(0.72rem, 1vw, 0.9rem);
-      font-weight: 400;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--ink);
-      text-align: center;
-      padding: 0 1.5rem;
-      opacity: 0;
-      animation: introIn 0.9s ease 0.35s forwards;
-    }
-    .intro-tag span { white-space: nowrap; }
-    @media (max-width: 600px) {
-      .intro { gap: 2rem; }
-      .intro-logo { width: 78vw; }
-      .intro-tag .sep { display: none; }
-      .intro-tag span:not(.sep) { display: block; }
-      .intro-tag span + span + span { margin-top: 0.4rem; }
-    }
-    @keyframes introIn { from { opacity: 0; } to { opacity: 1; } }
-    @media (prefers-reduced-motion: reduce) {
-      .intro-logo, .intro-tag { animation: none; opacity: 1; }
-    }
-
     /* ── SERVICE (auf der Startseite, zwischen Visuals und About) ── */
     #service {
       padding: calc(var(--gap) * 1.5) 1.5rem var(--gap) 1.5rem;
@@ -607,33 +554,6 @@
 </head>
 <body>
 
-  <!-- INTRO -->
-  <div class="intro" id="intro" role="button" tabindex="0" aria-label="Enter">
-    <div class="intro-logo"><img src="img/web/IMG_2625.jpg" alt=""></div>
-    <div class="intro-tag" data-de="&lt;span&gt;Design-Portfolio&lt;/span&gt;&lt;span class=&quot;sep&quot;&gt; — &lt;/span&gt;&lt;span&gt;Paula Werquet-Britzen&lt;/span&gt;"><span>Design Portfolio</span><span class="sep"> — </span><span>Paula Werquet-Britzen</span></div>
-  </div>
-  <script>
-    // Intro 2,5 Sekunden zeigen, dann ausblenden. Klick oder Enter überspringt.
-    // Nicht erneut zeigen, wenn man im selben Tab zurückkommt oder über einen Menülink (#work …) kommt.
-    (function () {
-      var el = document.getElementById('intro');
-      var seen = false;
-      try { seen = sessionStorage.getItem('werquet-intro') === '1'; } catch (e) {}
-      if (seen || location.hash) { el.parentNode.removeChild(el); return; }
-      document.documentElement.style.overflow = 'hidden';
-      var timer = setTimeout(done, 2500);
-      function done() {
-        clearTimeout(timer);
-        if (!el.parentNode || el.classList.contains('is-hidden')) return;
-        el.classList.add('is-hidden');
-        document.documentElement.style.overflow = '';
-        try { sessionStorage.setItem('werquet-intro', '1'); } catch (e) {}
-        setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 1000);
-      }
-      el.addEventListener('click', done);
-      document.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === 'Escape') done(); });
-    })();
-  </script>
 
   <!-- NAV -->
   <nav>
@@ -684,15 +604,15 @@
         <div class="track">
           <a href="projekte/armor-within-look-1.html" class="slide">
             <img src="img/web/thumb/image16.jpg" decoding="async" alt="Armor Within Look 1">
-            <div class="slide-caption"><h3>Armor Within Look 1</h3></div>
+            <div class="slide-caption"><h3>Armor&nbsp;Within Look&nbsp;1</h3></div>
           </a>
           <a href="projekte/armor-within-look-2.html" class="slide">
             <img src="img/web/thumb/image11.jpg" decoding="async" alt="Armor Within Look 2" style="object-position: center bottom;">
-            <div class="slide-caption"><h3>Armor Within Look 2</h3></div>
+            <div class="slide-caption"><h3>Armor&nbsp;Within Look&nbsp;2</h3></div>
           </a>
           <a href="projekte/armor-within-look-3.html" class="slide">
             <img src="img/web/thumb/image03.jpg" decoding="async" alt="Armor Within Look 3">
-            <div class="slide-caption"><h3>Armor Within Look 3</h3></div>
+            <div class="slide-caption"><h3>Armor&nbsp;Within Look&nbsp;3</h3></div>
           </a>
           <a href="projekte/leather-utility-belt.html" class="slide">
             <img src="img/web/thumb/Facetune_18-08-2026-01-13-02.jpg" decoding="async" alt="Leather Utility Belt" style="object-position: 100% center;">
@@ -751,7 +671,7 @@
           </a>
           <a href="projekte/armor-within-look-1.html" class="slide slide--video">
             <video src="video/web/IMG_9592.mp4" poster="video/web/IMG_9592.jpg" muted loop playsinline preload="none"></video>
-            <div class="slide-caption"><h3>Armor Within Look 1</h3></div>
+            <div class="slide-caption"><h3>Armor&nbsp;Within Look&nbsp;1</h3></div>
           </a>
           <a href="projekte/morphoskin.html" class="slide slide--video">
             <video src="video/web/video-output-6FA81461-A45D-4710-B276-1E6D2EAB4A80-1.mp4" poster="video/web/video-output-6FA81461-A45D-4710-B276-1E6D2EAB4A80-1.jpg" muted loop playsinline preload="none"></video>
@@ -759,7 +679,7 @@
           </a>
           <a href="projekte/armor-within-look-3.html" class="slide slide--video">
             <video src="video/web/IMG_9828.mp4" poster="video/web/IMG_9828.jpg" muted loop playsinline preload="none"></video>
-            <div class="slide-caption"><h3>Armor Within Look 3</h3></div>
+            <div class="slide-caption"><h3>Armor&nbsp;Within Look&nbsp;3</h3></div>
           </a>
           <a href="projekte/leather-utility-belt.html" class="slide slide--video">
             <video src="video/web/video-output-72EC3328-2E8A-4A96-8B30-196BBB1CD1AE-1.mp4" poster="video/web/video-output-72EC3328-2E8A-4A96-8B30-196BBB1CD1AE-1.jpg" muted loop playsinline preload="none"></video>
@@ -767,7 +687,7 @@
           </a>
           <a href="projekte/armor-within-look-2.html" class="slide slide--video">
             <video src="video/web/video-output-135F6D27-F909-40A6-B52D-B2CA53D53246-2.mp4" poster="video/web/video-output-135F6D27-F909-40A6-B52D-B2CA53D53246-2.jpg" style="object-position: 50% 20%;" muted loop playsinline preload="none"></video>
-            <div class="slide-caption"><h3>Armor Within Look 2</h3></div>
+            <div class="slide-caption"><h3>Armor&nbsp;Within Look&nbsp;2</h3></div>
           </a>
         </div>
         <button class="arrow arrow--prev" type="button" aria-label="Previous" data-de-aria="Zurück">
@@ -840,6 +760,29 @@
 
       function advance(dir) { normalize(); track.scrollBy({ left: dir * step() }); }
 
+      // Position merken: kommt man von einem Album zurück, steht die Reihe wieder dort,
+      // wo man zuletzt war (im selben Browser-Tab).
+      var posKey = 'werquet-pos-' + (wrap.closest('#video') ? 'video' : 'work');
+      var posRe = new RegExp('(?:^|;)' + posKey + '=(\\d+)');
+      function getPos() {
+        var v = null;
+        try { v = sessionStorage.getItem(posKey); } catch (e) {}
+        if (v === null) { var m = posRe.exec(window.name || ''); v = m ? m[1] : null; }
+        var i = parseInt(v, 10);
+        return (i >= 0 && i < n) ? i : 0;
+      }
+      function setPos(i) {
+        try { sessionStorage.setItem(posKey, String(i)); } catch (e) {}
+        try { window.name = (window.name || '').replace(posRe, '') + ';' + posKey + '=' + i; } catch (e) {}
+      }
+      function currentIndex() {
+        var i = Math.round((track.scrollLeft - setWidth()) / step());
+        return ((i % n) + n) % n;
+      }
+      var lastIndex = getPos();
+      function remember() { lastIndex = currentIndex(); setPos(lastIndex); }
+      function goToIndex(i) { jump(setWidth() + i * step()); }
+
       // Läuft von alleine weiter (Fotos alle 4 s, Videos alle 6 s).
       // Pause, solange die Maus über der Reihe ist, beim Wischen und wenn der Tab im Hintergrund ist.
       var interval = wrap.closest('#video') ? 6000 : 4000;
@@ -863,14 +806,16 @@
       var t, raf;
       track.addEventListener('scroll', function () {
         if (!raf) raf = requestAnimationFrame(function () { raf = null; markCenter(); });
-        clearTimeout(t); t = setTimeout(normalize, 150);
+        clearTimeout(t); t = setTimeout(function () { normalize(); remember(); }, 150);
       });
 
-      // Start: auf dem Original-Satz
-      jump(setWidth());
+      // Start: an der zuletzt gemerkten Stelle (beim ersten Besuch am Anfang)
+      goToIndex(lastIndex);
       startAuto();
-      window.addEventListener('load', function () { jump(setWidth()); });
-      window.addEventListener('resize', function () { jump(setWidth()); });
+      window.addEventListener('load', function () { goToIndex(lastIndex); });
+      window.addEventListener('resize', function () { goToIndex(lastIndex); });
+      window.addEventListener('pagehide', remember);
+      track.addEventListener('click', remember, true);
     });
   </script>
 
